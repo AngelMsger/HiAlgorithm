@@ -1,3 +1,5 @@
+// Entrance of Program.
+
 #include <iostream>
 #include <chrono>
 
