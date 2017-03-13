@@ -7,14 +7,15 @@
 
 using namespace std;
 
-#include "leetcode.h"
-
 class Solution {
 public:
-    // 1 - Two Sum
-    vector<int> twoSum(vector<int>& nums, int target);
+  // 1 - Two Sum
+  vector<int> twoSum(vector<int>& nums, int target);
 
-    // 15 - Three Num
-    vector<vector<int>> threeSum(vector<int>& nums);
+  // 2 - Add Two Numbers
+  ListNode* addTwoNumbers(ListNode* l1, ListNode* l2);
+
+  // 15 - Three Num
+  vector<vector<int>> threeSum(vector<int>& nums);
 };
 #endif

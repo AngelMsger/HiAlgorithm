@@ -1,5 +1,14 @@
 #include "leetcode.h"
 
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *   int val;
+ *   ListNode *next;
+ *   ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+
 vector<int> Solution::twoSum(vector<int>& nums, int target) {
   unordered_map<int, int> history;
   for (auto i = 0; i < nums.size(); ++i) {
