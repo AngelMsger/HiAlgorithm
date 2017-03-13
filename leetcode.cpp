@@ -20,39 +20,24 @@ vector<int> Solution::twoSum(vector<int>& nums, int target) {
 }
 
 ListNode* Solution::addTwoNumbers(ListNode* l1, ListNode* l2) {
-    ListNode* head = new ListNode(0), *tail = head;
-    int digit_sum, prev_over = 0;
-    for (; l1 && l2; l1 = l1->next, l2 = l2->next, tail = tail->next) {
-        digit_sum = l1->val + l2->val + prev_over;
-        if (digit_sum < 10) {
-            tail->next = new ListNode(digit_sum);
-            prev_over = 0;
+    ListNode result = ListNode(0), *current = &result;
+    int prevOver = 0;
+    while (l1 || l2 || prevOver) {
+        int digitSum = (l1 ? l1->val : 0) + (l2 ? l2->val : 0) + prevOver;
+        if (digitSum < 10) {
+            current->next = new ListNode(digitSum);
+            prevOver = 0;
         }
         else {
-            tail->next = new ListNode(digit_sum - 10);
-            prev_over = 1;
+            current->next = new ListNode(digitSum - 10);
+            prevOver = 1;
         }
+        l1 = l1 ? l1->next : nullptr;
+        l2 = l2 ? l2->next : nullptr;
+        current = current->next;
 
     }
-    ListNode *rest = l1 ? l1 : l2;
-    for (; rest; rest = rest->next, tail = tail->next) {
-        digit_sum = rest->val + prev_over;
-        if (digit_sum < 10) {
-            tail->next = new ListNode(digit_sum);
-            prev_over = 0;
-        }
-        else {
-            tail->next = new ListNode(digit_sum - 10);
-            prev_over = 1;
-        }
-    }
-    if (prev_over) {
-        tail->next = new ListNode(1);
-        tail = tail->next;
-    }
-    ListNode *result = head->next;
-    delete head;
-    return result;
+    return result.next;
 }
 
 vector<vector<int>> Solution::threeSum(vector<int>& nums) {

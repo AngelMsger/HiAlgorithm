@@ -12,13 +12,7 @@ int main() {
     vector<int> testCase = {-1, 0, 1, 2, -1, 4};
     ostream_iterator<int, char> osIterator(cout, ",");
     auto start = chrono::high_resolution_clock::now();
-    // Test Problem 2, Answer should be [2, 2, 2]
-    // ListNode *l1 = new ListNode(1);
-    // l1->next = new ListNode(1);
-    // l1->next->next = new ListNode(1);
-    // ListNode *l2 = new ListNode(1);
-    // l2->next = new ListNode(1);
-    // l2->next->next = new ListNode(1);
+
     auto l1 = new ListNode(5);
     auto l2 = new ListNode(5);
     auto answer = solution.addTwoNumbers(l1, l2);
@@ -34,7 +28,7 @@ int main() {
     //     cout << "],\n";
     // }
 
-    // Test Problem 2, Answer should be [2, 2, 2]
+    // Test Problem 2, Answer should be "01"
     for (; answer; answer = answer->next) {
         cout << answer->val;
     }
