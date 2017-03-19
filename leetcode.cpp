@@ -40,6 +40,19 @@ ListNode* Solution::addTwoNumbers(ListNode* l1, ListNode* l2) {
     return result.next;
 }
 
+int lengthOfLongestSubstring(string s) {
+        vector<int> history(256, -1);
+        int maxLength = 0, start = -1;
+        for (auto i = 0; i != s.size(); ++i) {
+            if (history[s[i]] > start) {
+                start = history[s[i]];
+            }
+            history[s[i]] = i;
+            maxLength = max(maxLength, i - start);
+        }
+        return maxLength;
+}
+
 vector<vector<int>> Solution::threeSum(vector<int>& nums) {
     sort(nums.begin(), nums.end());
     vector<vector<int>> result;

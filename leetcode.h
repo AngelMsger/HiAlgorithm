@@ -23,6 +23,9 @@ public:
     // 2 - Add Two Numbers
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2);
 
+    // 3 - Longest Substring Without Repeating Characters
+    int lengthOfLongestSubstring(string s);
+
     // 15 - Three Num
     vector<vector<int>> threeSum(vector<int>& nums);
 };
