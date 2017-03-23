@@ -1,4 +1,4 @@
-#include "leetcode.h"
+#include "solution.h"
 
 /**
  * Definition for singly-linked list.
