@@ -3,7 +3,7 @@
 #include <iostream>
 #include <chrono>
 #include <iterator>
-#include "leetcode.h"
+#include "solution.h"
 
 using namespace std;
 

@@ -40,7 +40,7 @@ ListNode* Solution::addTwoNumbers(ListNode* l1, ListNode* l2) {
     return result.next;
 }
 
-int lengthOfLongestSubstring(string s) {
+int Solution::lengthOfLongestSubstring(string s) {
         vector<int> history(256, -1);
         int maxLength = 0, start = -1;
         for (auto i = 0; i != s.size(); ++i) {
