@@ -72,3 +72,32 @@ vector<vector<int>> Solution::threeSum(vector<int>& nums) {
     }
     return result;
 }
+
+void TestSolution::twoSum() noexcept {
+    vector<int> v = {2, 7, 11, 15};
+    auto start = chrono::high_resolution_clock::now();
+    auto result = mSolution.twoSum(v, 9);
+    auto end = chrono::high_resolution_clock::now();
+    if (result.size() == 2
+        && find(result.begin(), result.end(), 0) != result.end()
+        && find(result.begin(), result.end(), 1) != result.end()) {
+        cout << "Pass" << endl;
+    }
+    else {
+        cout << "Failure" << endl;
+    }
+    copy(result.begin(), result.end(), ostream_iterator<int, char>(cout, " "));
+    cout << "\nin " << chrono::duration<float, milli>(end - start).count() << " ms." << endl;
+}
+
+void TestSolution::addTwoNumbers() {
+
+}
+
+void TestSolution::lengthOfLongestSubstring() {
+
+}
+
+void TestSolution::threeSum() {
+
+}
