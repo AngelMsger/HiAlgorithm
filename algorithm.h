@@ -3,9 +3,10 @@
 
 #include <vector>
 
-class Recursion {
-public:
+namespace Recursion {
+    int max(const std::vector<int> v, const int low, const int high) noexcept {
 
+    }
 };
 
 #endif

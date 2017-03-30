@@ -90,14 +90,14 @@ void TestSolution::twoSum() noexcept {
     cout << "\nin " << chrono::duration<float, milli>(end - start).count() << " ms." << endl;
 }
 
-void TestSolution::addTwoNumbers() {
+void TestSolution::addTwoNumbers() noexcept {
 
 }
 
-void TestSolution::lengthOfLongestSubstring() {
+void TestSolution::lengthOfLongestSubstring() noexcept {
 
 }
 
-void TestSolution::threeSum() {
+void TestSolution::threeSum() noexcept {
 
 }
