@@ -1,0 +1,4 @@
+add_executable(001 001.cpp)
+add_executable(002 002.cpp)
+add_executable(003 003.cpp)
+add_executable(015 015.cpp)

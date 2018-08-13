@@ -1,9 +1,7 @@
-cmake_minimum_required(VERSION 3.6)
+cmake_minimum_required(VERSION 3.11)
 
 project(HiAlgorithm)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 
-aux_source_directory(. SOURCE_FILES)
-
-add_executable(HiAlgorithm ${SOURCE_FILES})
+add_subdirectory(leetcode)
