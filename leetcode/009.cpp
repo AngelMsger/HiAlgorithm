@@ -60,6 +60,7 @@ private:
         }
         return front >= back;
     }
+
 public:
     bool isPalindrome(int x) {
         return nonStringVersion(x);
