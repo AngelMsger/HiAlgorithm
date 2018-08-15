@@ -5,6 +5,9 @@
 using namespace std;
 
 /**
+ * 006 - Z字形变换
+ * @see https://leetcode-cn.com/problems/zigzag-conversion/description/
+ *
  * 将字符串 "PAYPALISHIRING" 以Z字形排列成给定的行数：
  * P   A   H   N
  * A P L S I I G
