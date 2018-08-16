@@ -7,3 +7,6 @@
 
 ### Manacher
 * [005](005.cpp)
+
+### Greedy
+* [011](011.cpp)
