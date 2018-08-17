@@ -1,9 +1,3 @@
-//
-// Created by angelmsger on 8/16/18.
-//
-#include <bits/stdc++.h>
-using namespace std;
-
 /**
  * 012 - 整数转罗马数字
  * @see https://leetcode-cn.com/problems/integer-to-roman/description/
@@ -53,6 +47,15 @@ using namespace std;
  *
  * 解题思路：本题没有太多参考意义，可以跳过不做，答案由社区讨论6274提供。
  */
+
+#include <bits/stdc++.h>
+using namespace std;
+
+static auto _ = []() {
+    std::ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    return nullptr;
+}();
 
 const static char *M[] {"", "M", "MM", "MMM"};
 const static char *C[] {"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"};

@@ -1,9 +1,3 @@
-//
-// Created by angelmsger on 8/13/18.
-//
-#include <bits/stdc++.h>
-using namespace std;
-
 /**
  * 001 - 两数之和
  * @see https://leetcode-cn.com/problems/two-sum/description/
@@ -18,6 +12,15 @@ using namespace std;
  *
  * 解题思路：将已经算过，并且可能会被将来所用的内容选择合适的数据结构缓存下来。
  */
+
+#include <bits/stdc++.h>
+using namespace std;
+
+static auto _ = []() {
+    std::ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    return nullptr;
+}();
 
 class Solution {
 public:

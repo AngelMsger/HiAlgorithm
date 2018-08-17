@@ -1,9 +1,3 @@
-//
-// Created by angelmsger on 8/13/18.
-//
-#include <bits/stdc++.h>
-using namespace std;
-
 /**
  * 007 - 反转整数
  * @see https://leetcode-cn.com/problems/reverse-integer/description/
@@ -27,6 +21,15 @@ using namespace std;
  *
  * 解题思路：虽然是简单的问题，但要注意数值溢出以及除数为0的特殊情况。
  */
+
+#include <bits/stdc++.h>
+using namespace std;
+
+static auto _ = []() {
+    std::ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    return nullptr;
+}();
 
 class Solution {
 public:

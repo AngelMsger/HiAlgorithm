@@ -1,9 +1,3 @@
-//
-// Created by angelmsger on 8/13/18.
-//
-#include <bits/stdc++.h>
-using namespace std;
-
 /**
  * 002 - 两数相加
  * @see https://leetcode-cn.com/problems/add-two-numbers/description/
@@ -18,6 +12,15 @@ using namespace std;
  *
  * 解题思路：比较简单的计算，注意正确理解题意。
  */
+
+#include <bits/stdc++.h>
+using namespace std;
+
+static auto _ = []() {
+    std::ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    return nullptr;
+}();
 
 /**
  * Definition for singly-linked list.

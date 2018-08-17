@@ -1,9 +1,3 @@
-//
-// Created by angelmsger on 8/14/18.
-//
-#include <bits/stdc++.h>
-using namespace std;
-
 /**
  * 009 - 回文数
  * @see https://leetcode-cn.com/problems/palindrome-number/description/
@@ -30,6 +24,15 @@ using namespace std;
  * 解题思路：字符串版本可以双端为起点遍历，非字符串版本同样有多种实现方式，如007中的数字反转，
  * 或本题给出的逐位取数。
  */
+
+#include <bits/stdc++.h>
+using namespace std;
+
+static auto _ = []() {
+    std::ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    return nullptr;
+}();
 
 class Solution {
 private:

@@ -1,9 +1,3 @@
-//
-// Created by angelmsger on 8/14/18.
-//
-#include <bits/stdc++.h>
-using namespace std;
-
 /**
  * 005 - 最长回文子串
  * @see https://leetcode-cn.com/problems/longest-palindromic-substring/description/
@@ -33,6 +27,15 @@ using namespace std;
  *         205.%20%E6%B1%82%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4
  *         %B8%B2%E7%9A%84Manacher%E7%AE%97%E6%B3%95/
  */
+
+#include <bits/stdc++.h>
+using namespace std;
+
+static auto _ = []() {
+    std::ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    return nullptr;
+}();
 
 class Solution {
 private:

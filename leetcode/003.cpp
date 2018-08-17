@@ -1,9 +1,3 @@
-//
-// Created by angelmsger on 8/13/18.
-//
-#include <bits/stdc++.h>
-using namespace std;
-
 /**
  * 003 - 无重复字符的最长子串
  * @see https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/description/
@@ -18,6 +12,15 @@ using namespace std;
  * 解题思路：对于不仅依赖前一个，而是有可能依赖不定数量的前N个元素的问题，建立适当的数据结构缓存可能用到的计
  * 算结果，并考虑清楚边界情况。
  */
+
+#include <bits/stdc++.h>
+using namespace std;
+
+static auto _ = []() {
+    std::ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    return nullptr;
+}();
 
 class Solution {
 public:

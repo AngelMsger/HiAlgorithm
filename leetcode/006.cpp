@@ -1,9 +1,3 @@
-//
-// Created by angelmsger on 8/15/18.
-//
-#include <bits/stdc++.h>
-using namespace std;
-
 /**
  * 006 - Z字形变换
  * @see https://leetcode-cn.com/problems/zigzag-conversion/description/
@@ -32,6 +26,15 @@ using namespace std;
  *
  * 解题思路：按照规则逐步构造多个队列并顺序输出即可。
  */
+
+#include <bits/stdc++.h>
+using namespace std;
+
+static auto _ = []() {
+    std::ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    return nullptr;
+}();
 
 class Solution {
 public:
