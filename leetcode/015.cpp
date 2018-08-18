@@ -38,7 +38,7 @@ public:
                 if (sum < target) front++;
                 else if (sum > target) back--;
                 else {
-                    vector<int> triplet = {nums[i], nums[front], nums[back]};
+                    vector<int> triplet {nums[i], nums[front], nums[back]};
                     result.push_back(triplet);
                     while(front < back && nums[front] == triplet[1]) front++;
                 }
