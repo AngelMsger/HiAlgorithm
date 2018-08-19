@@ -41,6 +41,7 @@ private:
 public:
     vector<string> letterCombinations(string digits) {
         vector<string> result;
+        if (digits.empty()) return result;
         doCombinations(digits, result);
         return result;
     }
