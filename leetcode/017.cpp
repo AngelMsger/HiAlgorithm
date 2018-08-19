@@ -26,23 +26,23 @@ static auto _ = []() {
 static const vector<string> T = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
 
 class Solution {
+private:
+    void doCombinations(
+            const string &digits, vector<string> &result,
+            const int level = 0, const string &prefix = "") {
+        if (level == digits.size()) result.emplace_back(prefix);
+        else if ('0' <= digits[level] && digits[level] <= '9') {
+            for (auto ch : T[digits[level] - '0']) {
+                doCombinations(digits, result, level + 1, prefix + ch);
+            }
+        }
+    }
+
 public:
     vector<string> letterCombinations(string digits) {
-        if (digits.empty()) return vector<string>();
-        vector<string> results {""};
-        for (const auto &digit: digits) {
-            auto digitNum = digit - '0';
-            if (2 <= digitNum && digitNum <= 9) {
-                vector<string> candidate;
-                for (const auto &result: results) {
-                    for (const auto ch: T[digitNum]) {
-                        candidate.push_back(result + ch);
-                    }
-                }
-                swap(results, candidate);
-            } else break;
-        }
-        return results;
+        vector<string> result;
+        doCombinations(digits, result);
+        return result;
     }
 };
 
