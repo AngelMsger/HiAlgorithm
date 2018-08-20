@@ -31,7 +31,9 @@ public:
     vector<vector<int>> threeSum(vector<int>& nums) {
         sort(nums.begin(), nums.end());
         vector<vector<int>> result;
-        for (int i = 0; i < nums.size(); ++i) {
+        for (int i = 0; i < nums.size() && nums[i] <= 0; ++i) {
+            if (i > 0 && nums[i] == nums[i - 1]) continue;
+
             int front = i + 1, back = static_cast<int>(nums.size() - 1), target = -nums[i];
             while (front < back) {
                 int sum = nums[front] + nums[back];
@@ -39,11 +41,11 @@ public:
                 else if (sum > target) back--;
                 else {
                     vector<int> triplet {nums[i], nums[front], nums[back]};
-                    result.push_back(triplet);
-                    while(front < back && nums[front] == triplet[1]) front++;
+                    while(nums[front] == triplet[1] && front < back) front++;
+                    while(nums[back] == triplet[2] && front < back) back--;
+                    result.push_back(move(triplet));
                 }
             }
-            while(i < nums.size() && nums[i] == nums[i + 1]) ++i;
         }
         return result;
     }
@@ -57,8 +59,8 @@ int main(int argc, char *argv[]) {
     auto result = solution.threeSum(nums);
     auto end = chrono::high_resolution_clock::now();
 
-    auto console_iter = ostream_iterator<int, char>(cout, ",");
-    for_each(result.cbegin(), result.cend(), [&console_iter](auto &triple) {
+    auto console_iter = ostream_iterator<int>(cout, ",");
+    for_each(result.cbegin(), result.cend(), [&console_iter](const auto &triple) {
         copy(triple.cbegin(), triple.cend(), console_iter);
         cout << '\n';
     });

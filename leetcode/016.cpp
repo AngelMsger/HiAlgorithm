@@ -27,6 +27,7 @@ public:
         sort(nums.begin(), nums.end());
         auto candidate = nums[0] + nums[1] + nums[2], minDiff = abs(candidate - target);
         for (auto i = nums.cbegin(); i < nums.cend() - 2; ++i) {
+            if (i > nums.cbegin() && *i == *(i - 1)) continue;
             auto j = i + 1, k = nums.cend() - 1;
             while (j < k) {
                 auto sum = *i + *j + *k, diff = abs(sum - target);
