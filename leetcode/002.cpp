@@ -57,21 +57,37 @@ public:
 
 int main(int argc, char *argv[]) {
     Solution solution;
-    ListNode lhs_0(2), lhs_1(4), lhs_2(3);
-    lhs_0.next = &lhs_1;
-    lhs_1.next = &lhs_2;
-    ListNode rhs_0(5), rhs_1(6), rhs_2(4);
-    rhs_0.next = &rhs_1;
-    rhs_1.next = &rhs_2;
+    
+    auto print = [](ListNode *head) {
+        for (auto cur = head; cur; cur = cur->next) cout << cur->val << " -> ";
+        cout << endl;
+    };
+    
+    auto lhs = new ListNode(2);
+    lhs->next = new ListNode(4);
+    lhs->next->next = new ListNode(3);
+    
+    auto rhs = new ListNode(5);
+    rhs->next = new ListNode(6);
+    rhs->next->next = new ListNode(4);
 
     auto start = chrono::high_resolution_clock::now();
-    auto result = solution.addTwoNumbers(&lhs_0, &rhs_0);
+    auto result = solution.addTwoNumbers(lhs, rhs);
     auto end = chrono::high_resolution_clock::now();
 
-    for (auto i = result; i != nullptr; i = i->next) {
-        cout << " -> " << i->val;
-    }
+    print(lhs);
+    print(rhs);
+    print(result);
     cout << "\nin " << chrono::duration<float, milli>(end - start).count() << " ms." << endl;
-
+    
+    for (auto head: {lhs, rhs, result}) {
+        auto cur = head;
+        while (cur) {
+            auto next = cur->next;
+            delete(cur);
+            cur = next;
+        }
+    }
+    
     return 0;
 }
