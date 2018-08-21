@@ -16,4 +16,4 @@ add_executable(018 018.cpp)
 add_executable(019 019.cpp)
 add_executable(020 020.cpp)
 add_executable(021 021.cpp)
-
+add_executable(022 022.cpp)
