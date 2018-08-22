@@ -24,14 +24,15 @@
  * Y A   H R
  * P     I
  *
- * 解题思路：按照规则逐步构造多个队列并顺序输出即可。
+ * 解题思路:
+ * 按照规则逐步构造多个队列并顺序输出即可。
  */
 
 #include <bits/stdc++.h>
 using namespace std;
 
 static auto _ = []() {
-    std::ios::sync_with_stdio(false);
+    ios::sync_with_stdio(false);
     cin.tie(nullptr);
     return nullptr;
 }();

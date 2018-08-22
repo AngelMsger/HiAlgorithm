@@ -8,14 +8,15 @@
  * 输入：1->2->4, 1->3->4
  * 输出：1->1->2->3->4->4
  *
- * 解题思路： 简单归并。
+ * 解题思路:
+ * 简单归并。
  */
 
 #include <bits/stdc++.h>
 using namespace std;
 
 static auto _ = []() {
-    std::ios::sync_with_stdio(false);
+    ios::sync_with_stdio(false);
     cin.tie(nullptr);
     return nullptr;
 }();

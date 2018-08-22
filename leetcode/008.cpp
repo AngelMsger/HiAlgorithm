@@ -46,14 +46,15 @@
  *
  * 解释: 数字 "-91283472332" 超过 32 位有符号整数范围。因此返回 INT_MIN (−231) 。
  *
- * 解题思路：如解答，避免使用如long类型的变量来绕过int值的边界问题。
+ * 解题思路:
+ * 如解答，避免使用如long类型的变量来绕过int值的边界问题。
  */
 
 #include <bits/stdc++.h>
 using namespace std;
 
 static auto _ = []() {
-    std::ios::sync_with_stdio(false);
+    ios::sync_with_stdio(false);
     cin.tie(nullptr);
     return nullptr;
 }();

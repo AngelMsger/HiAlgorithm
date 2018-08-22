@@ -21,7 +21,8 @@
  * 进阶:
  * 你能不将整数转为字符串来解决这个问题吗？
  *
- * 解题思路：字符串版本可以双端为起点遍历，非字符串版本同样有多种实现方式，如007中的数字反转，
+ * 解题思路:
+ * 字符串版本可以双端为起点遍历，非字符串版本同样有多种实现方式，如007中的数字反转，
  * 或本题给出的逐位取数。
  */
 
@@ -29,7 +30,7 @@
 using namespace std;
 
 static auto _ = []() {
-    std::ios::sync_with_stdio(false);
+    ios::sync_with_stdio(false);
     cin.tie(nullptr);
     return nullptr;
 }();

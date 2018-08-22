@@ -12,13 +12,14 @@
  * 说明:
  * 尽管上面的答案是按字典序排列的，但是你可以任意选择答案输出的顺序。
  *
- * 解题思路：以树的结构思考问题。
+ * 解题思路:
+ * 以树的结构思考问题。
  */
 #include <bits/stdc++.h>
 using namespace std;
 
 static auto _ = []() {
-    std::ios::sync_with_stdio(false);
+    ios::sync_with_stdio(false);
     cin.tie(nullptr);
     return nullptr;
 }();

@@ -14,14 +14,15 @@
  * 进阶：
  * 你能尝试使用一趟扫描实现吗？
  *
- * 解题思路：两个迭代器，其中一个先走 n + 1 步，然后两个一起走，先走的迭代器走到头的时候后走的迭代器的下一
- *         个位置即为倒数第 n 个。
+ * 解题思路:
+ * 两个迭代器，其中一个先走 n + 1 步，然后两个一起走，先走的迭代器走到头的时候后走的迭代器的下一个位置即为
+ * 倒数第 n 个。
  */
 #include <bits/stdc++.h>
 using namespace std;
 
 static auto _ = []() {
-    std::ios::sync_with_stdio(false);
+    ios::sync_with_stdio(false);
     cin.tie(nullptr);
     return nullptr;
 }();

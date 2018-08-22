@@ -13,15 +13,18 @@
  *  [-1, -1, 2]
  * ]
  *
- * 解题思路：直接遍历带来的问题不仅是时间复杂度的上升，而且难以避免题中不可重复的要求。如果数据有序则问题得以简化。
- * 经验：当现有解决问题的方案的时间复杂度大于O(nlogn)时才会考虑引入排序以寻求优化。
+ * 解题思路:
+ * 直接遍历带来的问题不仅是时间复杂度的上升，而且难以避免题中不可重复的要求。如果数据有序则问题得以简化。
+ *
+ * 经验:
+ * 当现有解决问题的方案的时间复杂度大于O(nlogn)时才会考虑引入排序以寻求优化。
  */
 
 #include <bits/stdc++.h>
 using namespace std;
 
 static auto _ = []() {
-    std::ios::sync_with_stdio(false);
+    ios::sync_with_stdio(false);
     cin.tie(nullptr);
     return nullptr;
 }();

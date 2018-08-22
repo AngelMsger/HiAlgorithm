@@ -19,14 +19,15 @@
  * 注意:
  * 假设我们的环境只能存储 32 位有符号整数，其数值范围是 [−231,  231 − 1]。根据这个假设，如果反转后的整数溢出，则返回 0。
  *
- * 解题思路：虽然是简单的问题，但要注意数值溢出以及除数为0的特殊情况。
+ * 解题思路:
+ * 虽然是简单的问题，但要注意数值溢出以及除数为0的特殊情况。
  */
 
 #include <bits/stdc++.h>
 using namespace std;
 
 static auto _ = []() {
-    std::ios::sync_with_stdio(false);
+    ios::sync_with_stdio(false);
     cin.tie(nullptr);
     return nullptr;
 }();

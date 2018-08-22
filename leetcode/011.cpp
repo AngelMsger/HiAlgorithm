@@ -7,15 +7,16 @@
  *
  * 说明：你不能倾斜容器，且 n 的值至少为 2。
  *
- * 解题思路：贪心算法，在宽度由长至短的过程中，容量由较短者决定，在较短边长度不变的情况下，无论如何调
- *         整较长边都无法使容量更大。
+ * 解题思路:
+ * 贪心算法，在宽度由长至短的过程中，容量由较短者决定，在较短边长度不变的情况下，无论如何调整较长边
+ * 都无法使容量更大。
  */
 
 #include <bits/stdc++.h>
 using namespace std;
 
 static auto _ = []() {
-    std::ios::sync_with_stdio(false);
+    ios::sync_with_stdio(false);
     cin.tie(nullptr);
     return nullptr;
 }();

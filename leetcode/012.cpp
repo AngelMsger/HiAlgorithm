@@ -45,14 +45,15 @@
  * 输出: "MCMXCIV"
  * 解释: M = 1000, CM = 900, XC = 90, IV = 4.
  *
- * 解题思路：本题没有太多参考意义，可以跳过不做，答案由社区讨论6274提供。
+ * 解题思路:
+ * 本题没有太多参考意义，可以跳过不做，答案由社区讨论6274提供。
  */
 
 #include <bits/stdc++.h>
 using namespace std;
 
 static auto _ = []() {
-    std::ios::sync_with_stdio(false);
+    ios::sync_with_stdio(false);
     cin.tie(nullptr);
     return nullptr;
 }();

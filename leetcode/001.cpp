@@ -10,14 +10,15 @@
  * 因为 nums[0] + nums[1] = 2 + 7 = 9
  * 所以返回 [0, 1]
  *
- * 解题思路：将已经算过，并且可能会被将来所用的内容选择合适的数据结构缓存下来。
+ * 解题思路:
+ * 将已经算过，并且可能会被将来所用的内容选择合适的数据结构缓存下来。
  */
 
 #include <bits/stdc++.h>
 using namespace std;
 
 static auto _ = []() {
-    std::ios::sync_with_stdio(false);
+    ios::sync_with_stdio(false);
     cin.tie(nullptr);
     return nullptr;
 }();

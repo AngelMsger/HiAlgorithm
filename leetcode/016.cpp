@@ -7,7 +7,8 @@
  *
  * 例如，给定数组 nums = [-1，2，1，-4], 和 target = 1.与 target 最接近的三个数的和为 2. (-1 + 2 + 1 = 2).
  *
- * 解题思路：与15题十分类似。
+ * 解题思路:
+ * 与15题十分类似。
  */
 
 #include <bits/stdc++.h>
@@ -15,7 +16,7 @@
 using namespace std;
 
 static auto _ = []() {
-    std::ios::sync_with_stdio(false);
+    ios::sync_with_stdio(false);
     cin.tie(nullptr);
     return nullptr;
 }();

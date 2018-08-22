@@ -14,25 +14,25 @@
  * 输入: "cbbd"
  * 输出: "bb"
  *
- * 解题思路：最直接的方式是求得所有子串(递归)，并判断是否为回文串，时间复杂度为O(n^3)。
- *         更好的想法是遍历字符串中的每一个间隙并向两边扩展，或其优化版本Manacher(马拉车)算法，
- *         以及动态规划。
+ * 解题思路:
+ * 最直接的方式是求得所有子串(递归)，并判断是否为回文串，时间复杂度为O(n^3)。
+ * 更好的想法是遍历字符串中的每一个间隙并向两边扩展，或其优化版本Manacher(马拉车)算法，以及动态规划。
  *
- *         Manacher算法核心思想：
- *         如果待匹配位置处于已成功匹配过的回文串内，则其关于该回文串中心对称位置的回文信息可以作
- *         为本次匹配的基础而被重复利用。
+ * Manacher算法核心思想:
+ * 如果待匹配位置处于已成功匹配过的回文串内，则其关于该回文串中心对称位置的回文信息可以作为本次匹配的基
+ * 础而被重复利用。
  *
- *         @see https://segmentfault.com/a/1190000003914228
- *         @see https://graysonliu.github.io/2017/10/09/23.%20LeetCode%20-%
- *         205.%20%E6%B1%82%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4
- *         %B8%B2%E7%9A%84Manacher%E7%AE%97%E6%B3%95/
+ * @see https://segmentfault.com/a/1190000003914228
+ * @see https://graysonliu.github.io/2017/10/09/23.%20LeetCode%20-%205.%20%E6%B1%82
+ * %E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2%E7%9A%84Manacher%E7%AE%97
+ * %E6%B3%95/
  */
 
 #include <bits/stdc++.h>
 using namespace std;
 
 static auto _ = []() {
-    std::ios::sync_with_stdio(false);
+    ios::sync_with_stdio(false);
     cin.tie(nullptr);
     return nullptr;
 }();

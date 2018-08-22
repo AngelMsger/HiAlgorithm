@@ -28,13 +28,14 @@
  * 输入: "{[]}"
  * 输出: true
  *
- * 解题思路：将扫描到的左括号入栈，右括号与栈顶元素比较，匹配则弹出相消，全部顺利匹配完成则返回真。
+ * 解题思路:
+ * 将扫描到的左括号入栈，右括号与栈顶元素比较，匹配则弹出相消，全部顺利匹配完成则返回真。
  */
 #include <bits/stdc++.h>
 using namespace std;
 
 static auto _ = []() {
-    std::ios::sync_with_stdio(false);
+    ios::sync_with_stdio(false);
     cin.tie(nullptr);
     return nullptr;
 }();

@@ -13,13 +13,14 @@
  *  "()()()"
  *  ]
  *
- * 解题思路：每放置一个左括号，就可以多放置一个右括号。
+ * 解题思路:
+ * 每放置一个左括号，就可以多放置一个右括号。
  */
 #include <bits/stdc++.h>
 using namespace std;
 
 static auto _ = []() {
-    std::ios::sync_with_stdio(false);
+    ios::sync_with_stdio(false);
     cin.tie(nullptr);
     return nullptr;
 }();

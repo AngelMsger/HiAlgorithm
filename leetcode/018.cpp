@@ -18,15 +18,16 @@
  *  [-2,  0, 0, 2]
  * ]
  *
- * 解题思路：固定一个元素，则剩余部分是一个“三数之和”问题。固定两个元素，则剩余部分是一个
- *         “两数之和”问题。
+ * 解题思路:
+ * 固定一个元素，则剩余部分是一个“三数之和”问题。固定两个元素，则剩余部分是一个“两数之和”
+ * 问题。
  */
 #include <bits/stdc++.h>
 
 using namespace std;
 
 static auto _ = []() {
-    std::ios::sync_with_stdio(false);
+    ios::sync_with_stdio(false);
     cin.tie(nullptr);
     return nullptr;
 }();

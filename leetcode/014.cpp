@@ -16,13 +16,16 @@
  *
  * 说明:
  * 所有输入只包含小写字母 a-z 。
+ *
+ * 解题思路:
+ * 遍历比对数组中的字符串即可就得结果。
  */
 
 #include <bits/stdc++.h>
 using namespace std;
 
 static auto _ = []() {
-    std::ios::sync_with_stdio(false);
+    ios::sync_with_stdio(false);
     cin.tie(nullptr);
     return nullptr;
 }();

@@ -10,14 +10,15 @@
  * 输出：7 -> 0 -> 8
  * 原因：342 + 465 = 807
  *
- * 解题思路：比较简单的计算，注意正确理解题意。
+ * 解题思路:
+ * 比较简单的计算，注意正确理解题意。
  */
 
 #include <bits/stdc++.h>
 using namespace std;
 
 static auto _ = []() {
-    std::ios::sync_with_stdio(false);
+    ios::sync_with_stdio(false);
     cin.tie(nullptr);
     return nullptr;
 }();
