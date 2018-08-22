@@ -49,7 +49,7 @@ private:
 
     int origalSolution(vector<int> &nums) {
         int i = !nums.empty();
-        for (const auto n : nums) if (i > nums[i - 1]) nums[i++] = n;
+        for (const auto n : nums) if (n > nums[i - 1]) nums[i++] = n;
         return i;
     }
 public:
