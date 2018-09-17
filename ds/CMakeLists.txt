@@ -1,1 +1,1 @@
-add_executable(linkedlist linkedlist.cpp)
+add_executable(linkedlist list.cpp)
