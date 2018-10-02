@@ -1,1 +1,2 @@
-add_executable(linkedlist list.cpp)
+add_executable(list list.cpp)
+add_executable(tree tree.cpp)
