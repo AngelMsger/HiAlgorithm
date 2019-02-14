@@ -2,8 +2,10 @@
  * 027 - 移除元素
  * @see https://leetcode-cn.com/problems/remove-element/description/
  *
- * 给定一个数组 nums 和一个值 val，你需要原地移除所有数值等于 val 的元素，返回移除后数组的新长度。
- * 不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。
+ * 给定一个数组 nums 和一个值 val，你需要原地移除所有数值等于 val
+ * 的元素，返回移除后数组的新长度。
+ * 不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1)
+ * 额外空间的条件下完成。
  * 元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。
  *
  * 示例 1:
@@ -46,17 +48,18 @@ static auto _ = []() {
 }();
 
 class Solution {
-public:
+   public:
     int removeElement(vector<int> &nums, int val) {
         int i = 0;
-        for (const auto n : nums) if (n != val) nums[i++] = n;
+        for (const auto n : nums)
+            if (n != val) nums[i++] = n;
         return i;
     }
 };
 
 int main(int argc, char *argv[]) {
     Solution solution;
-    vector<int> nums {0, 1, 2, 2, 3, 0, 4, 2};
+    vector<int> nums{0, 1, 2, 2, 3, 0, 4, 2};
     const auto val = 2;
 
     auto start = chrono::high_resolution_clock::now();
@@ -65,7 +68,8 @@ int main(int argc, char *argv[]) {
 
     auto console_iter = ostream_iterator<int>(cout, ",");
     copy(nums.cbegin(), nums.cbegin() + result, console_iter);
-    cout << "\nin " << chrono::duration<float, milli>(end - start).count() << " ms." << endl;
+    cout << "\nin " << chrono::duration<float, milli>(end - start).count()
+         << " ms." << endl;
 
     return 0;
 }

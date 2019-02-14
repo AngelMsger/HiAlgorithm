@@ -1,6 +1,7 @@
 /**
  * 005 - 最长回文子串
- * @see https://leetcode-cn.com/problems/longest-palindromic-substring/description/
+ * @see
+ * https://leetcode-cn.com/problems/longest-palindromic-substring/description/
  *
  * 给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为1000。
  *
@@ -23,7 +24,8 @@
  * 础而被重复利用。
  *
  * @see https://segmentfault.com/a/1190000003914228
- * @see https://graysonliu.github.io/2017/10/09/23.%20LeetCode%20-%205.%20%E6%B1%82
+ * @see
+ * https://graysonliu.github.io/2017/10/09/23.%20LeetCode%20-%205.%20%E6%B1%82
  * %E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2%E7%9A%84Manacher%E7%AE%97
  * %E6%B3%95/
  */
@@ -38,7 +40,7 @@ static auto _ = []() {
 }();
 
 class Solution {
-private:
+   private:
     string usingDP(const string &s) {
         const auto n = s.size();
         // NOTICE: std::vector<bool> is DEPRECATED, carefully to use it.
@@ -75,7 +77,9 @@ private:
         auto mx = 0, id = 0;
         for (auto i = 0; i < length; ++i) {
             mp[i] = i < mx ? min(mp[2 * id - i], mx - i) : 1;
-            while (i + mp[i] < ma.size() && i + mp[i] > 0 && ma[i + mp[i]] == ma[i - mp[i]]) ++mp[i];
+            while (i + mp[i] < ma.size() && i + mp[i] > 0 &&
+                   ma[i + mp[i]] == ma[i - mp[i]])
+                ++mp[i];
             if (i + mp[i] > mx) {
                 mx = i + mp[i];
                 id = i;
@@ -83,13 +87,12 @@ private:
         }
         auto center = max_element(mp.cbegin(), mp.cend()) - mp.cbegin();
         auto radius = mp[center] - 1;
-        return string(s.cbegin() + (center - radius) / 2, s.cbegin() + (center + radius) / 2);
+        return string(s.cbegin() + (center - radius) / 2,
+                      s.cbegin() + (center + radius) / 2);
     }
 
-public:
-    string longestPalindrome(string s) {
-        return usingManacher(s);
-    }
+   public:
+    string longestPalindrome(string s) { return usingManacher(s); }
 };
 
 int main(int argc, char *argv[]) {
@@ -100,7 +103,8 @@ int main(int argc, char *argv[]) {
     auto end = chrono::high_resolution_clock::now();
 
     cout << result;
-    cout << "\nin " << chrono::duration<float, milli>(end - start).count() << " ms." << endl;
+    cout << "\nin " << chrono::duration<float, milli>(end - start).count()
+         << " ms." << endl;
 
     return 0;
 }

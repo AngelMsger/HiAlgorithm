@@ -1,6 +1,7 @@
 /**
  * 019 - 删除链表的倒数第N个节点
- * @see https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/description/
+ * @see
+ * https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/description/
  *
  * 给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。
  *
@@ -15,7 +16,8 @@
  * 你能尝试使用一趟扫描实现吗？
  *
  * 解题思路:
- * 两个迭代器，其中一个先走 n + 1 步，然后两个一起走，先走的迭代器走到头的时候后走的迭代器的下一个位置即为
+ * 两个迭代器，其中一个先走 n + 1
+ * 步，然后两个一起走，先走的迭代器走到头的时候后走的迭代器的下一个位置即为
  * 倒数第 n 个。
  */
 #include <bits/stdc++.h>
@@ -37,8 +39,8 @@ struct ListNode {
 };
 
 class Solution {
-public:
-    ListNode* removeNthFromEnd(ListNode* head, int n) {
+   public:
+    ListNode *removeNthFromEnd(ListNode *head, int n) {
         if (!(head && n > 0)) return head;
         auto cur = head, forward = head;
         auto relative = 0;
@@ -56,8 +58,7 @@ public:
                 auto candidate = cur->next;
                 cur->next = cur->next ? cur->next->next : nullptr;
                 delete candidate;
-            }
-            else {
+            } else {
                 head = head->next;
                 delete cur;
             }
@@ -86,7 +87,8 @@ int main(int argc, char *argv[]) {
 
     print(head);
     print(result);
-    cout << "\nin " << chrono::duration<float, milli>(end - start).count() << " ms." << endl;
+    cout << "\nin " << chrono::duration<float, milli>(end - start).count()
+         << " ms." << endl;
 
     cur = result;
     while (cur) {

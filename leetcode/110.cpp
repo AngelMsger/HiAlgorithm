@@ -39,7 +39,7 @@ static auto _ = []() {
     return nullptr;
 }();
 
-//Definition for a binary tree node.
+// Definition for a binary tree node.
 struct TreeNode {
     int val;
     TreeNode *left;
@@ -50,7 +50,7 @@ struct TreeNode {
 TreeNode::TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
 
 class Solution {
-private:
+   private:
     const int dfs(const TreeNode *root) {
         if (!root) return 0;
         auto left = dfs(root->left);
@@ -61,13 +61,12 @@ private:
         if (1 < diff) return -1;
         return max(left, right) + 1;
     }
-public:
-    bool isBalanced(TreeNode* root) {
-        return dfs(root) != -1;
-    }
+
+   public:
+    bool isBalanced(TreeNode *root) { return dfs(root) != -1; }
 };
 
-TreeNode * construct(int, TreeNode * = nullptr);
+TreeNode *construct(int, TreeNode * = nullptr);
 void destruct(TreeNode *);
 
 int main(int argc, char *argv[]) {
@@ -82,15 +81,17 @@ int main(int argc, char *argv[]) {
     auto end = chrono::high_resolution_clock::now();
 
     cout << result;
-    cout << "\nin " << chrono::duration<float, milli>(end - start).count() << " ms." << endl;
+    cout << "\nin " << chrono::duration<float, milli>(end - start).count()
+         << " ms." << endl;
 
     destruct(root);
     return 0;
 }
 
 // 构造测试树
-TreeNode * construct(int val, TreeNode *root) {
-    if (!root) return new TreeNode(val);
+TreeNode *construct(int val, TreeNode *root) {
+    if (!root)
+        return new TreeNode(val);
     else {
         auto pN = &(val < root->val ? root->left : root->right);
         return *pN ? construct(val, *pN) : *pN = new TreeNode(val);
@@ -99,14 +100,14 @@ TreeNode * construct(int val, TreeNode *root) {
 
 // 析构测试树
 void destruct(TreeNode *root) {
-   if (!root) return;
-   queue<TreeNode *> q;
-   q.push(root);
-   while (!q.empty()) {
-       const auto cur = q.front();
-       if (cur->left) q.push(cur->left);
-       if (cur->right) q.push(cur->right);
-       q.pop();
-       delete cur;
-   }
+    if (!root) return;
+    queue<TreeNode *> q;
+    q.push(root);
+    while (!q.empty()) {
+        const auto cur = q.front();
+        if (cur->left) q.push(cur->left);
+        if (cur->right) q.push(cur->right);
+        q.pop();
+        delete cur;
+    }
 }

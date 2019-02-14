@@ -2,9 +2,9 @@
  * 018 - 四数之和
  * @see https://leetcode-cn.com/problems/4sum/description/
  *
- * 给定一个包含 n 个整数的数组 nums 和一个目标值 target，判断 nums 中是否存在四个元素
- * a，b，c 和 d ，使得 a + b + c + d 的值与 target 相等？找出所有满足条件且不重复的
- * 四元组。
+ * 给定一个包含 n 个整数的数组 nums 和一个目标值 target，判断 nums
+ * 中是否存在四个元素 a，b，c 和 d ，使得 a + b + c + d 的值与 target
+ * 相等？找出所有满足条件且不重复的 四元组。
  *
  * 注意：
  * 答案中不可以包含重复的四元组。
@@ -33,7 +33,7 @@ static auto _ = []() {
 }();
 
 class Solution {
-public:
+   public:
     vector<vector<int>> fourSum(vector<int> &nums, int target) {
         vector<vector<int>> result;
         if (nums.size() < 4) return move(result);
@@ -48,8 +48,10 @@ public:
                 auto k = j + 1, l = nums.cend() - 1;
                 while (k < l) {
                     auto sum = *k + *l;
-                    if (sum < tupleTarget) k++;
-                    else if (sum > tupleTarget) l--;
+                    if (sum < tupleTarget)
+                        k++;
+                    else if (sum > tupleTarget)
+                        l--;
                     else {
                         vector<int> quad{*i, *j, *k, *l};
                         while (*k == quad[2] && k < l) k++;
@@ -65,7 +67,7 @@ public:
 
 int main(int argc, char *argv[]) {
     Solution solution;
-    vector<int> nums {1, -2, -5, -4, -3, 3, 3, 5};
+    vector<int> nums{1, -2, -5, -4, -3, 3, 3, 5};
     const auto target = -11;
 
     auto start = chrono::high_resolution_clock::now();
@@ -77,7 +79,8 @@ int main(int argc, char *argv[]) {
         copy(ultra.cbegin(), ultra.cend(), console_iter);
         cout << '\n';
     });
-    cout << "\nin " << chrono::duration<float, milli>(end - start).count() << " ms." << endl;
+    cout << "\nin " << chrono::duration<float, milli>(end - start).count()
+         << " ms." << endl;
 
     return 0;
 }

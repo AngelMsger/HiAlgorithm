@@ -41,18 +41,21 @@ static auto _ = []() {
 }();
 
 class Solution {
-public:
+   public:
     bool isValid(string s) {
         if (s.size() & 1 == 1) return false;
-        unordered_set<char> lhs {'(', '[', '{'};
-        unordered_map<char, char> rhs {{')', '('}, {']', '['}, {'}', '{'}};
+        unordered_set<char> lhs{'(', '[', '{'};
+        unordered_map<char, char> rhs{{')', '('}, {']', '['}, {'}', '{'}};
         unordered_map<char, char>::const_iterator candidate;
         stack<char> history;
         for (const auto ch : s) {
-            if (lhs.find(ch) != lhs.cend()) history.push(ch);
+            if (lhs.find(ch) != lhs.cend())
+                history.push(ch);
             else if ((candidate = rhs.find(ch)) != rhs.cend()) {
-                if (history.empty() || history.top() != candidate->second) return false;
-                else history.pop();
+                if (history.empty() || history.top() != candidate->second)
+                    return false;
+                else
+                    history.pop();
             }
         }
         return history.empty();
@@ -67,7 +70,8 @@ int main(int argc, char *argv[]) {
     auto end = chrono::high_resolution_clock::now();
 
     cout << (result ? "matched" : "not matched") << endl;
-    cout << "\nin " << chrono::duration<float, milli>(end - start).count() << " ms." << endl;
+    cout << "\nin " << chrono::duration<float, milli>(end - start).count()
+         << " ms." << endl;
 
     return 0;
 }

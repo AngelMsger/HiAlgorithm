@@ -15,8 +15,8 @@
  * 若函数不能执行有效的转换，返回 0。
  *
  * 说明：
- * 假设我们的环境只能存储 32 位有符号整数，其数值范围是 [−231,  231 − 1]。如果数值超过可表示的范围，则返回
- * INT_MAX (231 − 1) 或 INT_MIN (−231) 。
+ * 假设我们的环境只能存储 32 位有符号整数，其数值范围是 [−231,  231 −
+ * 1]。如果数值超过可表示的范围，则返回 INT_MAX (231 − 1) 或 INT_MIN (−231) 。
  *
  * 示例 1:
  * 输入: "42"
@@ -26,7 +26,9 @@
  * 输入: "   -42"
  * 输出: -42
  *
- * 解释: 第一个非空白字符为 '-', 它是一个负号。我们尽可能将负号与后面所有连续出现的数字组合起来，最后得到 -42 。
+ * 解释: 第一个非空白字符为 '-',
+ * 它是一个负号。我们尽可能将负号与后面所有连续出现的数字组合起来，最后得到 -42
+ * 。
  *
  * 示例 3:
  * 输入: "4193 with words"
@@ -44,7 +46,8 @@
  * 输入: "-91283472332"
  * 输出: -2147483648
  *
- * 解释: 数字 "-91283472332" 超过 32 位有符号整数范围。因此返回 INT_MIN (−231) 。
+ * 解释: 数字 "-91283472332" 超过 32 位有符号整数范围。因此返回 INT_MIN (−231)
+ * 。
  *
  * 解题思路:
  * 如解答，避免使用如long类型的变量来绕过int值的边界问题。
@@ -60,10 +63,10 @@ static auto _ = []() {
 }();
 
 class Solution {
-public:
+   public:
     int myAtoi(string str) {
-        // Many solution use long to avoid value overflow, in fact, however, it's not allowed
-        // in the mean of this question.
+        // Many solution use long to avoid value overflow, in fact, however,
+        // it's not allowed in the mean of this question.
         const auto length = str.size();
         const auto threshold = INT32_MAX / 10;
         const auto thresholdX10 = threshold * 10;
@@ -76,17 +79,21 @@ public:
         }
         auto result = 0;
         while (i < length && '0' <= str[i] && str[i] <= '9') {
-            if (result < threshold) result = result * 10 + (str[i++] - '0');
+            if (result < threshold)
+                result = result * 10 + (str[i++] - '0');
             else if (result == threshold) {
                 auto candidate = str[i] - '0';
                 auto limit = INT32_MAX - thresholdX10;
                 if (indicator == 1) {
-                    return candidate <= limit ? thresholdX10 + candidate : INT32_MAX;
+                    return candidate <= limit ? thresholdX10 + candidate
+                                              : INT32_MAX;
                 } else {
-                    return candidate <= limit + 1 ? thresholdX10 * -1 - candidate : INT32_MIN;
+                    return candidate <= limit + 1
+                               ? thresholdX10 * -1 - candidate
+                               : INT32_MIN;
                 }
-            }
-            else return indicator == 1 ? INT32_MAX : INT32_MIN;
+            } else
+                return indicator == 1 ? INT32_MAX : INT32_MIN;
         }
         return indicator * result;
     }
@@ -102,7 +109,8 @@ int main(int argc, char *argv[]) {
     auto end = chrono::high_resolution_clock::now();
 
     cout << result1 << ", " << result2 << ", " << result3;
-    cout << "\nin " << chrono::duration<float, milli>(end - start).count() << " ms." << endl;
+    cout << "\nin " << chrono::duration<float, milli>(end - start).count()
+         << " ms." << endl;
 
     return 0;
 }

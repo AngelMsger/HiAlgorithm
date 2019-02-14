@@ -26,12 +26,12 @@ static auto _ = []() {
  */
 struct ListNode {
     int val;
-    ListNode *next;
+    ListNode* next;
     ListNode(int x) : val(x), next(nullptr) {}
 };
 
 class Solution {
-public:
+   public:
     ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
         if (!(l1 && l2)) return l1 ? l1 : l2;
         const auto lt = l1->val < l2->val;
@@ -44,10 +44,10 @@ public:
     }
 };
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
     Solution solution;
 
-    auto print = [](ListNode *head) {
+    auto print = [](ListNode* head) {
         for (auto cur = head; cur; cur = cur->next) cout << cur->val << " -> ";
         cout << endl;
     };
@@ -71,7 +71,8 @@ int main(int argc, char *argv[]) {
     auto end = chrono::high_resolution_clock::now();
 
     print(result);
-    cout << "\nin " << chrono::duration<float, milli>(end - start).count() << " ms." << endl;
+    cout << "\nin " << chrono::duration<float, milli>(end - start).count()
+         << " ms." << endl;
 
     cur = result;
     while (cur) {

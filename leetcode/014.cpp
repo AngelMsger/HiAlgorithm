@@ -31,11 +31,12 @@ static auto _ = []() {
 }();
 
 class Solution {
-public:
-    string longestCommonPrefix(vector<string>& strs) {
+   public:
+    string longestCommonPrefix(vector<string> &strs) {
         if (strs.empty()) return "";
         auto minSize = strs[0].size();
-        for (const auto &str : strs) if (str.size() < minSize) minSize = str.size();
+        for (const auto &str : strs)
+            if (str.size() < minSize) minSize = str.size();
         for (auto i = 0; i < minSize; ++i) {
             auto c = strs[0][i];
             for (auto &str : strs) {
@@ -50,14 +51,15 @@ public:
 
 int main(int argc, char *argv[]) {
     Solution solution;
-    vector<string> strs {"flower", "flow", "flight"};
+    vector<string> strs{"flower", "flow", "flight"};
 
     auto start = chrono::high_resolution_clock::now();
     auto result = solution.longestCommonPrefix(strs);
     auto end = chrono::high_resolution_clock::now();
 
     cout << result;
-    cout << "\nin " << chrono::duration<float, milli>(end - start).count() << " ms." << endl;
+    cout << "\nin " << chrono::duration<float, milli>(end - start).count()
+         << " ms." << endl;
 
     return 0;
 }

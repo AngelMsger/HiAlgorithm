@@ -24,7 +24,7 @@ static auto _ = []() {
 }();
 
 class Solution {
-public:
+   public:
     vector<int> twoSum(vector<int>& nums, int target) {
         unordered_map<int, int> history;
         for (auto i = 0; i < nums.size(); ++i) {
@@ -36,9 +36,9 @@ public:
     }
 };
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
     Solution solution;
-    vector<int> nums {2, 7, 11, 15};
+    vector<int> nums{2, 7, 11, 15};
     int target = 9;
 
     auto start = chrono::high_resolution_clock::now();
@@ -47,7 +47,8 @@ int main(int argc, char *argv[]) {
 
     auto console_iter = ostream_iterator<int>(cout);
     copy(result.cbegin(), result.cend(), console_iter);
-    cout << "\nin " << chrono::duration<float, milli>(end - start).count() << " ms." << endl;
+    cout << "\nin " << chrono::duration<float, milli>(end - start).count()
+         << " ms." << endl;
 
     return 0;
 }

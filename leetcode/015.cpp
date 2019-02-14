@@ -2,8 +2,8 @@
  * 015 - 三数之和
  * @see https://leetcode-cn.com/problems/3sum/description/
  *
- * 给定一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？
- * 找出所有满足条件且不重复的三元组。
+ * 给定一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得
+ * a + b + c = 0 ？ 找出所有满足条件且不重复的三元组。
  *
  * 注意：答案中不可以包含重复的三元组。
  * 例如, 给定数组 nums = [-1, 0, 1, 2, -1, -4]，
@@ -30,22 +30,25 @@ static auto _ = []() {
 }();
 
 class Solution {
-public:
-    vector<vector<int>> threeSum(vector<int>& nums) {
+   public:
+    vector<vector<int>> threeSum(vector<int> &nums) {
         sort(nums.begin(), nums.end());
         vector<vector<int>> result;
         for (int i = 0; i < nums.size() && nums[i] <= 0; ++i) {
             if (i > 0 && nums[i] == nums[i - 1]) continue;
 
-            int front = i + 1, back = static_cast<int>(nums.size() - 1), target = -nums[i];
+            int front = i + 1, back = static_cast<int>(nums.size() - 1),
+                target = -nums[i];
             while (front < back) {
                 int sum = nums[front] + nums[back];
-                if (sum < target) front++;
-                else if (sum > target) back--;
+                if (sum < target)
+                    front++;
+                else if (sum > target)
+                    back--;
                 else {
-                    vector<int> triplet {nums[i], nums[front], nums[back]};
-                    while(nums[front] == triplet[1] && front < back) front++;
-                    while(nums[back] == triplet[2] && front < back) back--;
+                    vector<int> triplet{nums[i], nums[front], nums[back]};
+                    while (nums[front] == triplet[1] && front < back) front++;
+                    while (nums[back] == triplet[2] && front < back) back--;
                     result.push_back(move(triplet));
                 }
             }
@@ -56,18 +59,20 @@ public:
 
 int main(int argc, char *argv[]) {
     Solution solution;
-    vector<int> nums {-1, 0, 1, 2, -1, -4};
+    vector<int> nums{-1, 0, 1, 2, -1, -4};
 
     auto start = chrono::high_resolution_clock::now();
     auto result = solution.threeSum(nums);
     auto end = chrono::high_resolution_clock::now();
 
     auto console_iter = ostream_iterator<int>(cout, ",");
-    for_each(result.cbegin(), result.cend(), [&console_iter](const auto &triple) {
-        copy(triple.cbegin(), triple.cend(), console_iter);
-        cout << '\n';
-    });
-    cout << "\nin " << chrono::duration<float, milli>(end - start).count() << " ms." << endl;
+    for_each(result.cbegin(), result.cend(),
+             [&console_iter](const auto &triple) {
+                 copy(triple.cbegin(), triple.cend(), console_iter);
+                 cout << '\n';
+             });
+    cout << "\nin " << chrono::duration<float, milli>(end - start).count()
+         << " ms." << endl;
 
     return 0;
 }

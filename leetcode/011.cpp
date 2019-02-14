@@ -22,28 +22,30 @@ static auto _ = []() {
 }();
 
 class Solution {
-public:
+   public:
     int maxArea(vector<int>& height) {
         auto front = height.cbegin(), back = height.cend() - 1;
         auto candidate = 0;
         while (front < back) {
-            candidate = max(static_cast<int>(back - front) * min(*front,  *back), candidate);
+            candidate = max(static_cast<int>(back - front) * min(*front, *back),
+                            candidate);
             *front < *back ? front++ : back--;
         }
         return candidate;
     }
 };
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
     Solution solution;
-    vector<int> height {1, 8, 6, 2, 5, 4, 8, 3, 7};
+    vector<int> height{1, 8, 6, 2, 5, 4, 8, 3, 7};
 
     auto start = chrono::high_resolution_clock::now();
     auto result = solution.maxArea(height);
     auto end = chrono::high_resolution_clock::now();
 
     cout << result;
-    cout << "\nin " << chrono::duration<float, milli>(end - start).count() << " ms." << endl;
+    cout << "\nin " << chrono::duration<float, milli>(end - start).count()
+         << " ms." << endl;
 
     return 0;
 }

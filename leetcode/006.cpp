@@ -38,15 +38,16 @@ static auto _ = []() {
 }();
 
 class Solution {
-public:
+   public:
     string convert(string s, int numRows) {
         if (numRows < 2) {
             return s;
         }
         const auto length = s.size();
         auto bucketSize = numRows * 2 - 2;
-        auto bucketsCount = length % bucketSize == 0 ? length / bucketSize : length / bucketSize + 1;
-        vector<vector<char>> rows((unsigned long) numRows);
+        auto bucketsCount = length % bucketSize == 0 ? length / bucketSize
+                                                     : length / bucketSize + 1;
+        vector<vector<char>> rows((unsigned long)numRows);
         for (auto i = 0; i < bucketsCount; ++i) {
             auto j = 0, k = i * bucketSize;
             while (j < numRows && k < length) {
@@ -60,7 +61,7 @@ public:
             }
         }
         ostringstream oss;
-        for (const vector<char> &row: rows) {
+        for (const vector<char> &row : rows) {
             copy(row.cbegin(), row.cend(), ostream_iterator<char>(oss));
         }
         return oss.str();
@@ -75,7 +76,8 @@ int main(int argc, char *argv[]) {
     auto end = chrono::high_resolution_clock::now();
 
     cout << result;
-    cout << "\nin " << chrono::duration<float, milli>(end - start).count() << " ms." << endl;
+    cout << "\nin " << chrono::duration<float, milli>(end - start).count()
+         << " ms." << endl;
 
     return 0;
 }

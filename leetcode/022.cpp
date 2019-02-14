@@ -2,7 +2,8 @@
  * 022 - 括号生成
  * @see https://leetcode-cn.com/problems/generate-parentheses/description/
  *
- * 给出 n 代表生成括号的对数，请你写出一个函数，使其能够生成所有可能的并且有效的括号组合。
+ * 给出 n
+ * 代表生成括号的对数，请你写出一个函数，使其能够生成所有可能的并且有效的括号组合。
  * 例如，给出 n = 3，生成结果为：
  *
  * [
@@ -26,12 +27,13 @@ static auto _ = []() {
 }();
 
 class Solution {
-// TODO: 修正非线程安全写法。
-private:
+    // TODO: 修正非线程安全写法。
+   private:
     int n = 0;
     vector<string> result;
     void backtrack(string &prefix, const int left, const int right) {
-        if (prefix.size() == 2 * n) result.push_back(prefix);
+        if (prefix.size() == 2 * n)
+            result.push_back(prefix);
         else {
             if (left < n) {
                 prefix.push_back('(');
@@ -45,7 +47,8 @@ private:
             };
         }
     }
-public:
+
+   public:
     vector<string> generateParenthesis(int n) {
         this->n = n;
         string prefix;
@@ -63,7 +66,8 @@ int main(int argc, char *argv[]) {
 
     auto console_iter = ostream_iterator<string>(cout, "\n");
     copy(result.cbegin(), result.cend(), console_iter);
-    cout << "\nin " << chrono::duration<float, milli>(end - start).count() << " ms." << endl;
+    cout << "\nin " << chrono::duration<float, milli>(end - start).count()
+         << " ms." << endl;
 
     return 0;
 }

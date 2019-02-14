@@ -36,7 +36,7 @@ static auto _ = []() {
 }();
 
 class Solution {
-private:
+   private:
     bool stringVersion(int x) {
         auto xStr = to_string(x);
         auto front = xStr.cbegin(), back = xStr.cend() - 1;
@@ -65,10 +65,8 @@ private:
         return front >= back;
     }
 
-public:
-    bool isPalindrome(int x) {
-        return nonStringVersion(x);
-    }
+   public:
+    bool isPalindrome(int x) { return nonStringVersion(x); }
 };
 
 int main(int argc, char *argv[]) {
@@ -79,7 +77,8 @@ int main(int argc, char *argv[]) {
     auto end = chrono::high_resolution_clock::now();
 
     cout << result;
-    cout << "\nin " << chrono::duration<float, milli>(end - start).count() << " ms." << endl;
+    cout << "\nin " << chrono::duration<float, milli>(end - start).count()
+         << " ms." << endl;
 
     return 0;
 }
