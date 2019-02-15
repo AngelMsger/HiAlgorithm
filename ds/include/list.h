@@ -26,9 +26,9 @@ class List {
     static void insertion_sort(ListNode<T> *begin, ListNode<T> *end);
     static void merge_sort(ListNode<T> *begin, ListNode<T> *end);
     static void merge(ListNode<T> *begin, ListNode<T> *mid, ListNode<T> *end);
-    ListNode<T> *move_to(size_t i) const;
-    ListNode<T> *erase_cur(ListNode<T> *lhs);
-    void reset_last(long lvi = -1, ListNode<T> *lvn = nullptr) noexcept;
+    virtual ListNode<T> *move_to(size_t i) const;
+    virtual ListNode<T> *erase_cur(ListNode<T> *lhs);
+    virtual void reset_last(long lvi = -1, ListNode<T> *lvn = nullptr) noexcept;
 
    public:
     explicit List();

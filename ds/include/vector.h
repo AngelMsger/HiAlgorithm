@@ -16,7 +16,7 @@ class Vector {
     T *_elem;
 
    protected:
-    inline void expand();
+    inline virtual void expand();
     // TODO: shrink
 
    public:
