@@ -5,13 +5,20 @@
 
 namespace angelmsger {
 template <typename K, typename V>
-struct TreeNode {
+class BSTreeNode {
+   public:
     K key;
     V val;
-    TreeNode<K, V> *parent = nullptr, *left = nullptr, *right = nullptr;
+    BSTreeNode<K, V> *parent = nullptr, *left = nullptr, *right = nullptr;
+    BSTreeNode<K, V> *succ() const;
 };
 
-template <typename K, typename V, typename N = TreeNode<K, V>>
+template <typename K, typename V>
+BSTreeNode<K, V> *BSTreeNode<K, V>::succ() const {
+    return nullptr;
+}
+
+template <typename K, typename V, typename N = BSTreeNode<K, V>>
 class BSTree {};
 }  // namespace angelmsger
 

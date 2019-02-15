@@ -8,10 +8,7 @@ namespace angelmsger {
 enum Color { red, black };
 
 template <typename K, typename V>
-struct RBTreeNode {
-    K key;
-    V val;
-    RBTreeNode<K, V> *parent = nullptr, *left = nullptr, *right = nullptr;
+class RBTreeNode : public BSTreeNode<K, V> {
     size_t height = 0;
     Color color = black;
 };

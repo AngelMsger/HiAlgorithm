@@ -6,11 +6,9 @@
 
 namespace angelmsger {
 template <typename K, typename V>
-struct AVLTreeNode {
-    K key;
-    V val;
-    AVLTreeNode<K, V> *parent = nullptr, *left = nullptr, *right = nullptr;
-    size_t height;
+class AVLTreeNode : public BSTreeNode<K, V> {
+   public:
+    size_t height = 0;
 };
 
 template <typename K, typename V, typename N = AVLTreeNode<K, V>>
