@@ -22,13 +22,13 @@ class List {
     mutable ListNode<T> *_lvn = nullptr;
 
    protected:
+    static ListNode<T> *swap_node(ListNode<T> *lhs, ListNode<T> *rhs);
+    static void insertion_sort(ListNode<T> *begin, ListNode<T> *end);
+    static void merge_sort(ListNode<T> *begin, ListNode<T> *end);
+    static void merge(ListNode<T> *begin, ListNode<T> *mid, ListNode<T> *end);
     ListNode<T> *move_to(size_t i) const;
-    ListNode<T> *remove_cur(ListNode<T> *lhs);
-    void reset_last(const long lvi = -1,
-                    const ListNode<T> *lvn = nullptr) noexcept;
-    void merge_sort(ListNode<T> *begin, ListNode<T> *end);
-    void insertion_sort(ListNode<T> *begin, ListNode<T> *end);
-    void merge(ListNode<T> *lhs, ListNode<T> *rhs);
+    ListNode<T> *erase_cur(ListNode<T> *lhs);
+    void reset_last(long lvi = -1, ListNode<T> *lvn = nullptr) noexcept;
 
    public:
     explicit List();
@@ -42,17 +42,80 @@ class List {
     inline T &get(size_t i);
     inline void put(size_t i, const T &val);
     size_t insert(size_t i, const T &val);
-    inline size_t remove(size_t i);
-    size_t remove(size_t lo, size_t hi);
+    inline size_t erase(size_t i);
+    size_t erase(size_t lo, size_t hi);
+    size_t remove(const T &val);
     size_t disordered() const noexcept;
-    void sort(const bool using_merge = true);
-    void sort(size_t lo, size_t hi, const bool using_merge = true);
+    void sort(bool using_merge = true);
+    void sort(size_t lo, size_t hi, bool using_merge = true);
     inline size_t find(const T &val);
     size_t find(const T &val, size_t lo, size_t hi);
     size_t deduplicated();
     size_t uniquify();  // 针对有序列表
     void traverse(function<void(const T &)> visit) const noexcept;
 };
+
+template <typename T>
+ListNode<T> *List<T>::swap_node(ListNode<T> *lhs, ListNode<T> *rhs) {
+    auto next = rhs->next;
+    rhs->prev->next = rhs->next;
+    rhs->next->prev = rhs->prev;
+    rhs->prev = lhs->prev;
+    rhs->next = lhs;
+    lhs->prev->next = rhs;
+    lhs->prev = rhs;
+    return next;
+}
+
+template <typename T>
+void List<T>::insertion_sort(ListNode<T> *begin, ListNode<T> *end) {
+    if (begin == end) return;
+    begin = begin->prev;
+    auto cur = begin->next->next;
+    while (cur != end) {
+        auto pos = begin->next;
+        while (pos != cur) {
+            if (cur->elem < pos->elem) {
+                cur = swap_node(pos, cur);
+                break;
+            } else
+                pos = pos->next;
+        }
+        if (pos == cur) cur = cur->next;
+    }
+}
+
+template <typename T>
+void List<T>::merge_sort(ListNode<T> *begin, ListNode<T> *end) {
+    auto next = begin->next;
+    if (begin == end || next == end)
+        return;
+    else if (next->next == end) {
+        if (next->elem < begin->elem) {
+            swap_node(begin, next);
+        }
+    } else {
+        auto slow = begin, fast = slow;
+        while (fast != end && fast->next != end) {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        auto prev_part = begin->prev;
+        merge_sort(begin, slow);
+        auto post_part = slow->prev;
+        merge_sort(slow, end);
+        merge(prev_part->next, post_part->next, end);
+    }
+}
+
+template <typename T>
+void List<T>::merge(ListNode<T> *begin, ListNode<T> *mid, ListNode<T> *end) {
+    while (begin != mid) {
+        while (mid != end && mid->elem < begin->elem)
+            mid = swap_node(begin, mid);
+        begin = begin->next;
+    }
+}
 
 template <typename T>
 ListNode<T> *List<T>::move_to(size_t i) const {
@@ -83,16 +146,17 @@ ListNode<T> *List<T>::move_to(size_t i) const {
 }
 
 template <typename T>
-ListNode<T> *List<T>::remove_cur(ListNode<T> *lhs) {
+ListNode<T> *List<T>::erase_cur(ListNode<T> *lhs) {
     auto next = lhs->next;
     lhs->prev->next = next;
     next->prev = lhs->prev;
     delete lhs;
+    --_size;
     return next;
 }
 
 template <typename T>
-void List<T>::reset_last(const long lvi, const ListNode<T> *lvn) noexcept {
+void List<T>::reset_last(long lvi, ListNode<T> *lvn) noexcept {
     _lvi = lvi;
     _lvn = lvn;
 }
@@ -138,7 +202,7 @@ List<T>::List(const List<T> &rhs) {
 template <typename T>
 List<T>::~List() {
     auto cur = _head->next;
-    while (cur != _head) cur = remove_cur(cur);
+    while (cur != _head) cur = erase_cur(cur);
     delete _head;
 }
 
@@ -192,12 +256,12 @@ size_t List<T>::insert(size_t i, const T &val) {
 }
 
 template <typename T>
-size_t List<T>::remove(size_t i) {
-    return this->remove(i, i + 1);
+size_t List<T>::erase(size_t i) {
+    return this->erase(i, i + 1);
 }
 
 template <typename T>
-size_t List<T>::remove(size_t lo, size_t hi) {
+size_t List<T>::erase(size_t lo, size_t hi) {
     assert(0 <= lo && lo < hi && hi <= _size);
     auto steps = hi - lo;
     auto cur = move_to(lo);
@@ -214,6 +278,19 @@ size_t List<T>::remove(size_t lo, size_t hi) {
 }
 
 template <typename T>
+size_t List<T>::remove(const T &val) {
+    size_t modified = 0;
+    auto cur = _head->next;
+    while (cur != _head) {
+        if (cur->elem == val)
+            cur = this->erase_cur(cur);
+        else
+            cur = cur->next;
+    }
+    return modified;
+}
+
+template <typename T>
 size_t List<T>::disordered() const noexcept {
     if (_size < 2) return 0;
     size_t n = 0;
@@ -223,18 +300,19 @@ size_t List<T>::disordered() const noexcept {
 }
 
 template <typename T>
-void List<T>::sort(const bool using_merge) {
+void List<T>::sort(bool using_merge) {
     this->sort(0, _size, using_merge);
 }
 
 template <typename T>
-void List<T>::sort(size_t lo, size_t hi, const bool using_merge) {
+void List<T>::sort(size_t lo, size_t hi, bool using_merge) {
     auto begin = move_to(lo), end = move_to(hi);
     if (using_merge) {
         this->merge_sort(begin, end);
     } else {
         this->insertion_sort(begin, end);
     }
+    this->reset_last();
 }
 
 template <typename T>
@@ -255,21 +333,23 @@ size_t List<T>::find(const T &val, size_t lo, size_t hi) {
 
 template <typename T>
 size_t List<T>::deduplicated() {
-    auto i = 0;
-    auto modified = 0;
-    //        auto cur = _head->next->next;
-    //        while (cur != _head) {
-    //            this->find(t, 0, i)
-    //        }
-    //        reset_last();
-    return modified;
+    auto origin_size = _size;
+    size_t i = 1;
+    for (auto cur = _head->next->next; cur->next != _head;
+         cur = cur->next, ++i) {
+        while (cur != _head && this->find(cur->elem, 0, i) < i)
+            cur = this->erase_cur(cur);
+    }
+    this->reset_last();
+    return origin_size - _size;
 }
 
 template <typename T>
 size_t List<T>::uniquify() {
     for (auto cur = _head->next; cur->next != _head; cur = cur->next)
-        while (cur->elem == cur->next->elem) cur = this->remove_cur(cur);
-    reset_last();
+        while (cur->next != _head && cur->elem == cur->next->elem)
+            cur = this->erase_cur(cur);
+    this->reset_last();
     return 0;
 }
 

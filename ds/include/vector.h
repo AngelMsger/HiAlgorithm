@@ -31,8 +31,9 @@ class Vector {
     inline T &get(size_t i);
     inline void put(size_t i, const T &val);
     size_t insert(size_t i, const T &val);
-    inline size_t remove(size_t i);
-    size_t remove(size_t lo, size_t hi);
+    inline size_t erase(size_t i);
+    size_t erase(size_t lo, size_t hi);
+    size_t remove(const T &val);
     size_t disordered() const noexcept;
     void sort();
     void sort(size_t lo, size_t hi);
@@ -132,16 +133,29 @@ size_t Vector<T>::insert(size_t i, const T &val) {
 }
 
 template <typename T>
-size_t Vector<T>::remove(size_t i) {
-    return this->remove(i, i + 1);
+size_t Vector<T>::erase(size_t i) {
+    return this->erase(i, i + 1);
 }
 
 template <typename T>
-size_t Vector<T>::remove(size_t lo, size_t hi) {
+size_t Vector<T>::erase(size_t lo, size_t hi) {
     assert(0 <= lo && lo < hi && hi <= _size);
     while (hi < _size) *(_elem + lo++) = *(_elem + hi++);
     _size = lo;
     return hi - lo;
+}
+
+template <typename T>
+size_t Vector<T>::remove(const T &val) {
+    size_t cur = 0;
+    for (auto i = 0; i < _size; ++i) {
+        if (*(_elem + i) != val) {
+            *(_elem + cur++) = *(_elem + i);
+        }
+    }
+    auto modified = _size - cur;
+    _size = cur;
+    return modified;
 }
 
 template <typename T>
@@ -162,15 +176,16 @@ void Vector<T>::sort(size_t lo, size_t hi) {
     auto size = hi - lo;
     if (size < 2) return;
     auto first = _elem + lo, last = _elem + hi;
-    auto offset = std::rand() / ((RAND_MAX + 1u) / size);
+    auto offset = rand_int(0, size);
     swap(*first, *(first + offset));
     auto i = first + 1;
     for (auto j = i; j < last; ++j) {
-        if (*j < *first) swap(*(i++), *j);
+        if (*j <= *first) swap(*(i++), *j);
     }
-    swap(*first, *(i - 1));
-    this->sort(lo, lo + offset);
-    this->sort(lo + offset, hi);
+    auto mid = i - 1;
+    swap(*first, *mid);
+    this->sort(lo, mid - _elem);
+    this->sort(mid - _elem, hi);
 }
 
 template <typename T>
