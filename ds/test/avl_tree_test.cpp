@@ -2,4 +2,7 @@
 
 using namespace angelmsger;
 
-int main(const int argc, const char *argv[]) { return 0; }
+int main(const int argc, const char *argv[]) {
+    AVLTree<int, int> tree;
+    return 0;
+}

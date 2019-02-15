@@ -7,7 +7,7 @@ namespace angelmsger {
 template <typename T>
 class Stack {
    private:
-    List<T> _elems;
+    List<T> _elem;
 
    public:
     inline size_t size() const noexcept;
@@ -20,17 +20,17 @@ class Stack {
 
 template <typename T>
 size_t Stack<T>::size() const noexcept {
-    return _elems.size();
+    return _elem.size();
 }
 
 template <typename T>
 bool Stack<T>::empty() const noexcept {
-    return _elems.empty();
+    return _elem.empty();
 }
 
 template <typename T>
 void Stack<T>::push(const T &val) {
-    _elems.insert(0, val);
+    _elem.insert(0, val);
 }
 
 template <typename T>
@@ -40,13 +40,13 @@ const T &Stack<T>::top() const {
 
 template <typename T>
 T &Stack<T>::top() {
-    return _elems.get(0);
+    return _elem.get(0);
 }
 
 template <typename T>
 T &Stack<T>::pop() {
     T top = move(this->top());
-    _elems.erase(0, 1);
+    _elem.erase(0, 1);
     return top;
 }
 }  // namespace angelmsger

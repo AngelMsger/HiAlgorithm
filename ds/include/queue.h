@@ -7,7 +7,7 @@ namespace angelmsger {
 template <typename T>
 class Queue {
    private:
-    List<T> _elems;
+    List<T> _elem;
 
    public:
     inline size_t size() const noexcept;
@@ -22,17 +22,17 @@ class Queue {
 
 template <typename T>
 size_t Queue<T>::size() const noexcept {
-    return _elems.size();
+    return _elem.size();
 }
 
 template <typename T>
 bool Queue<T>::empty() const noexcept {
-    return _elems.empty();
+    return _elem.empty();
 }
 
 template <typename T>
 void Queue<T>::push(const T &val) {
-    _elems.insert(_elems.size(), val);
+    _elem.insert(_elem.size(), val);
 }
 
 template <typename T>
@@ -42,7 +42,7 @@ const T &Queue<T>::front() const {
 
 template <typename T>
 T &Queue<T>::front() {
-    return _elems.get(0);
+    return _elem.get(0);
 }
 
 template <typename T>
@@ -52,13 +52,13 @@ const T &Queue<T>::back() const {
 
 template <typename T>
 T &Queue<T>::back() {
-    return _elems.get(_elems.size() - 1);
+    return _elem.get(_elem.size() - 1);
 }
 
 template <typename T>
 T &Queue<T>::pop() {
     T front = move(this->front());
-    _elems.erase(0, 1);
+    _elem.erase(0, 1);
     return front;
 }
 }  // namespace angelmsger
