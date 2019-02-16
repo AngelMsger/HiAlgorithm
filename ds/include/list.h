@@ -20,15 +20,13 @@ class List {
     ListNode<T> *_head;
     mutable long _lvi = -1;
     mutable ListNode<T> *_lvn = nullptr;
-
-   protected:
+    virtual ListNode<T> *move_to(size_t i) const;
+    virtual ListNode<T> *erase_cur(ListNode<T> *lhs);
+    virtual void reset_last(long lvi = -1, ListNode<T> *lvn = nullptr) noexcept;
     static ListNode<T> *swap_node(ListNode<T> *lhs, ListNode<T> *rhs);
     static void insertion_sort(ListNode<T> *begin, ListNode<T> *end);
     static void merge_sort(ListNode<T> *begin, ListNode<T> *end);
     static void merge(ListNode<T> *begin, ListNode<T> *mid, ListNode<T> *end);
-    virtual ListNode<T> *move_to(size_t i) const;
-    virtual ListNode<T> *erase_cur(ListNode<T> *lhs);
-    virtual void reset_last(long lvi = -1, ListNode<T> *lvn = nullptr) noexcept;
 
    public:
     explicit List();
