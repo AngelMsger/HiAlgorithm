@@ -46,7 +46,8 @@ size_t BSTreeNode<K, V>::size() const {
 
 template <typename K, typename V>
 BSTreeNode<K, V> *BSTreeNode<K, V>::succ() const {
-    if (!right) return nullptr;
+    // FIXME: Wrong Implemention.
+    if (!right) return parent;
     auto cur = right;
     while (cur->left) cur = cur->left;
     return cur;
@@ -65,27 +66,65 @@ BSTreeNode<K, V> *BSTreeNode<K, V>::insert_as_right(const K &key,
 
 template <typename K, typename V>
 void BSTreeNode<K, V>::traverse_bfs(
-    function<void(const K &, const V &)> func) const {}
+    function<void(const K &, const V &)> func) const {
+    Queue<BSTreeNode<K, V> *> queue{this};
+    while (!queue.empty()) {
+        auto cur = queue.pop();
+        func(cur->key, cur->val);
+        if (cur->left) queue.push(cur->left);
+        if (cur->right) queue.push(cur->right);
+    }
+}
 
 template <typename K, typename V>
 void BSTreeNode<K, V>::traverse_dfs_prev(
     function<void(const K &, const V &)> func) const {
-    Stack<N *> stack{this};
+    Stack<BSTreeNode<K, V> *> stack{this};
     while (!stack.empty()) {
-        auto cur = stack.pop();
-        func(cur->key, cur->val);
-        if (cur->right) stack.push(cur->right);
-        if (cur->left) stack.push(cur->left);
+        for (auto cur = stack.pop(); cur; cur = cur->left) {
+            func(cur->key, cur->val);
+            if (cur->right) stack.push(cur->right);
+        }
     }
 }
 
 template <typename K, typename V>
 void BSTreeNode<K, V>::traverse_dfs_in(
-    function<void(const K &, const V &)> func) const {}
+    function<void(const K &, const V &)> func) const {
+    Stack<BSTreeNode<K, V> *> stack;
+    auto cur = this;
+    do {
+        while (cur) {
+            stack.push(cur);
+            cur = cur->left;
+        }
+        cur = stack.pop();
+        func(cur->key, cur->val);
+        cur = cur->right;
+    } while (cur || !stack.empty());
+}
 
 template <typename K, typename V>
 void BSTreeNode<K, V>::traverse_dfs_post(
-    function<void(const K &, const V &)> func) const {}
+    function<void(const K &, const V &)> func) const {
+    Stack<BSTreeNode<K, V> *> stack;
+    BSTreeNode<K, V> *last = nullptr;
+    auto cur = this;
+    do {
+        while (cur) {
+            stack.push(cur);
+            cur = cur->left;
+        }
+        cur = stack.top();
+        if (!cur->right || last == cur->right) {
+            func(cur->key, cur->val);
+            last = stack.pop();
+            cur = nullptr;
+        } else {
+            cur = cur->right;
+        }
+    } while (cur || !stack.empty());
+}
 
 template <typename N>
 inline long stature(N *pos) {
