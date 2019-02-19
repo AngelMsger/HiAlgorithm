@@ -23,6 +23,10 @@
         "streambuf": "cpp",
         "tuple": "cpp",
         "type_traits": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "locale": "cpp",
+        "array": "cpp",
+        "future": "cpp",
+        "thread": "cpp"
     }
 }

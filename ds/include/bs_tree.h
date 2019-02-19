@@ -20,14 +20,8 @@ class BSTreeNode {
     BSTreeNode<K, V> *parent, *left, *right;
     size_t height = 0;
     inline size_t size() const;
-    BSTreeNode<K, V> *succ() const;
     inline BSTreeNode<K, V> *insert_as_left(const K &key, const V &val);
-    inline BSTreeNode<K, V> *insert_as_right(const K &key, const V &val);
-    // TODO: Non-Const 副本
-    void traverse_bfs(function<void(const K &, const V &)> func) const;
-    void traverse_dfs_prev(function<void(const K &, const V &)> func) const;
-    void traverse_dfs_in(function<void(const K &, const V &)> func) const;
-    void traverse_dfs_post(function<void(const K &, const V &)> func) const;
+    inline BSTreeNode<K, V> *insert_as_right(const K &key, const V &val)
 };
 
 template <typename K, typename V>
@@ -45,15 +39,6 @@ size_t BSTreeNode<K, V>::size() const {
 }
 
 template <typename K, typename V>
-BSTreeNode<K, V> *BSTreeNode<K, V>::succ() const {
-    // FIXME: Wrong Implemention.
-    if (!right) return parent;
-    auto cur = right;
-    while (cur->left) cur = cur->left;
-    return cur;
-}
-
-template <typename K, typename V>
 BSTreeNode<K, V> *BSTreeNode<K, V>::insert_as_left(const K &key, const V &val) {
     return left = new BSTreeNode<K, V>(key, val, this);
 }
@@ -62,68 +47,6 @@ template <typename K, typename V>
 BSTreeNode<K, V> *BSTreeNode<K, V>::insert_as_right(const K &key,
                                                     const V &val) {
     return right = new BSTreeNode<K, V>(key, val, this);
-}
-
-template <typename K, typename V>
-void BSTreeNode<K, V>::traverse_bfs(
-    function<void(const K &, const V &)> func) const {
-    Queue<BSTreeNode<K, V> *> queue{this};
-    while (!queue.empty()) {
-        auto cur = queue.pop();
-        func(cur->key, cur->val);
-        if (cur->left) queue.push(cur->left);
-        if (cur->right) queue.push(cur->right);
-    }
-}
-
-template <typename K, typename V>
-void BSTreeNode<K, V>::traverse_dfs_prev(
-    function<void(const K &, const V &)> func) const {
-    Stack<BSTreeNode<K, V> *> stack{this};
-    while (!stack.empty()) {
-        for (auto cur = stack.pop(); cur; cur = cur->left) {
-            func(cur->key, cur->val);
-            if (cur->right) stack.push(cur->right);
-        }
-    }
-}
-
-template <typename K, typename V>
-void BSTreeNode<K, V>::traverse_dfs_in(
-    function<void(const K &, const V &)> func) const {
-    Stack<BSTreeNode<K, V> *> stack;
-    auto cur = this;
-    do {
-        while (cur) {
-            stack.push(cur);
-            cur = cur->left;
-        }
-        cur = stack.pop();
-        func(cur->key, cur->val);
-        cur = cur->right;
-    } while (cur || !stack.empty());
-}
-
-template <typename K, typename V>
-void BSTreeNode<K, V>::traverse_dfs_post(
-    function<void(const K &, const V &)> func) const {
-    Stack<BSTreeNode<K, V> *> stack;
-    BSTreeNode<K, V> *last = nullptr;
-    auto cur = this;
-    do {
-        while (cur) {
-            stack.push(cur);
-            cur = cur->left;
-        }
-        cur = stack.top();
-        if (!cur->right || last == cur->right) {
-            func(cur->key, cur->val);
-            last = stack.pop();
-            cur = nullptr;
-        } else {
-            cur = cur->right;
-        }
-    } while (cur || !stack.empty());
 }
 
 template <typename N>
@@ -146,11 +69,17 @@ class BSTree {
    public:
     inline size_t size() const noexcept;
     inline bool empty() const noexcept;
-    // TODO: Non-Const 副本
-    void traverse_bfs(function<void(const K &, const V &)> func) const;
-    void traverse_dfs_prev(function<void(const K &, const V &)> func) const;
-    void traverse_dfs_in(function<void(const K &, const V &)> func) const;
-    void traverse_dfs_post(function<void(const K &, const V &)> func) const;
+    inline void traverse_bfs(function<void(const K &, const V &)> func) const;
+    void traverse_bfs(function<void(K &, V &)> func);
+    inline void traverse_dfs_prev(
+        function<void(const K &, const V &)> func) const;
+    void traverse_dfs_prev(function<void(K &, V &)> func);
+    inline void traverse_dfs_in(
+        function<void(const K &, const V &)> func) const;
+    void traverse_dfs_in(function<void(K &, V &)> func);
+    inline void traverse_dfs_post(
+        function<void(const K &, const V &)> func) const;
+    void traverse_dfs_post(function<void(K &, V &)> func);
 };
 
 template <typename K, typename V, typename N>
@@ -200,25 +129,87 @@ bool BSTree<K, V, N>::empty() const noexcept {
 template <typename K, typename V, typename N>
 void BSTree<K, V, N>::traverse_bfs(
     function<void(const K &, const V &)> func) const {
-    if (_root) _root->traverse_bfs(func);
+    const_cast<BSTree<K, V, N> *>(this)->traverse_bfs(func);
+}
+
+template <typename K, typename V, typename N>
+void BSTree<K, V, N>::traverse_bfs(function<void(K &, V &)> func) {
+    if (!_root) return;
+    Queue<N *> queue{_root};
+    while (!queue.empty()) {
+        auto cur = queue.pop();
+        func(cur->key, cur->val);
+        if (cur->left) queue.push(cur->left);
+        if (cur->right) queue.push(cur->right);
+    }
 }
 
 template <typename K, typename V, typename N>
 void BSTree<K, V, N>::traverse_dfs_prev(
     function<void(const K &, const V &)> func) const {
-    if (_root) _root->traverse_dfs_prev(func);
+    const_cast<BSTree<K, V, N> *>(this)->traverse_dfs_prev(func);
+}
+
+template <typename K, typename V, typename N>
+void BSTree<K, V, N>::traverse_dfs_prev(function<void(K &, V &)> func) {
+    if (!_root) return;
+    Stack<N *> stack{_root};
+    while (!stack.empty()) {
+        for (auto cur = stack.pop(); cur; cur = cur->left) {
+            func(cur->key, cur->val);
+            if (cur->right) stack.push(cur->right);
+        }
+    }
 }
 
 template <typename K, typename V, typename N>
 void BSTree<K, V, N>::traverse_dfs_in(
     function<void(const K &, const V &)> func) const {
-    if (_root) _root->traverse_dfs_in(func);
+    const_cast<BSTree<K, V, N> *>(this)->traverse_dfs_in(func);
+}
+
+template <typename K, typename V, typename N>
+void BSTree<K, V, N>::traverse_dfs_in(function<void(K &, V &)> func) {
+    if (!_root) return;
+    Stack<N *> stack;
+    auto cur = _root;
+    do {
+        while (cur) {
+            stack.push(cur);
+            cur = cur->left;
+        }
+        cur = stack.pop();
+        func(cur->key, cur->val);
+        cur = cur->right;
+    } while (cur || !stack.empty());
 }
 
 template <typename K, typename V, typename N>
 void BSTree<K, V, N>::traverse_dfs_post(
     function<void(const K &, const V &)> func) const {
-    if (_root) _root->traverse_dfs_post(func);
+    const_cast<BSTree<K, V, N> *>(this)->traverse_dfs_post(func);
+}
+
+template <typename K, typename V, typename N>
+void BSTree<K, V, N>::traverse_dfs_post(function<void(K &, V &)> func) {
+    if (!_root) return;
+    Stack<N *> stack;
+    N *last = nullptr;
+    auto cur = _root;
+    do {
+        while (cur) {
+            stack.push(cur);
+            cur = cur->left;
+        }
+        cur = stack.top();
+        if (!cur->right || last == cur->right) {
+            func(cur->key, cur->val);
+            last = stack.pop();
+            cur = nullptr;
+        } else {
+            cur = cur->right;
+        }
+    } while (cur || !stack.empty());
 }
 }  // namespace angelmsger
 

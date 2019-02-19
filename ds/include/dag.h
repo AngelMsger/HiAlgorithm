@@ -3,6 +3,14 @@
 
 #include "base.h"
 
-namespace angelmsger {}
+namespace angelmsger {
+template <typename K, typename V>
+struct DAGNode {
+    K key;
+    V val;
+};
+
+class DAG {};
+}  // namespace angelmsger
 
 #endif  // HIALGORITHM_DAG_H
