@@ -2,7 +2,7 @@
 
 ![banner](banner.gif)
 
-> 我现在想成为一名不那么差的程序员。 -- Vista Chyi 2018.8
+> 我现在想成为一名不那么差的程序员。 -- 2018.8
 
 ## Content
 
@@ -16,3 +16,4 @@ See [here](leetcode) for Detail.
 ## Changelog
 * 2018/08/24 - Init Data Structure Module.
 * 2018/08/13 - Migrate Original Code, Init LeetCode Module.
+* 2019/02/20 - Initially Finished Vector, List, Stack, Queue, BSTree.

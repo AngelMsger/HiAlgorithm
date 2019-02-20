@@ -35,6 +35,10 @@ inline size_t rand_int(size_t lo, size_t hi) {
     }
 }
 
-inline void echo(const int val) { cout << val << ", "; };
+template <typename T>
+void echo(const T &val) { cout << val << ", "; };
+
+template <typename K, typename V>
+void echo(const K &key, const V &val) { cout << '(' << key << ", " << val << "), "; };
 
 #endif  // HIALGORITHM_BASE_H
