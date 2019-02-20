@@ -3,14 +3,14 @@
 using namespace angelmsger;
 
 int main(const int argc, const char *argv[]) {
-    AVLTree<int, char> tree;
-    auto echo_pair = echo<int, char>;
+    AVLTree<int, int> tree;
+    auto echo_pair = echo<int, int>;
     cout << "\ntree.size(): " << tree.size()
          << "\ntree.height(): " << tree.height()
          << "\ntree.empty(): " << (tree.empty() ? "true" : "false");
     cout << "\ntree.set(1, 'a'), ..., tree.set(6, 'g')...\n";
     for (auto i = 0; i < 7; ++i) {
-        tree.set(i, static_cast<const char &>('a' + i));
+        tree.set(i, i * 1024);
     }
     auto result = tree.get(6);
     cout << "tree.get(6): ";

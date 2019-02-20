@@ -19,7 +19,7 @@ class BSTreeNode {
                BSTreeNode<K, V> *right = nullptr);
     BSTreeNode(const BSTreeNode<K, V> &) = delete;
 
-    virtual BSTreeNode<K, V> *operator=(const BSTreeNode<K, V> &) = delete;
+    BSTreeNode<K, V> *operator=(const BSTreeNode<K, V> &) = delete;
     inline size_t size() const;
     inline bool is_left() const;
     inline bool is_right() const;
@@ -115,8 +115,8 @@ class BSTree {
     virtual size_t update_height(N *pos);
     //    virtual N *insert_as_left(N *pos, const K &key, const V &val);
     //    virtual N *insert_as_right(N *pos, const K &key, const V &val);
-    virtual N *&insert_at(N *&pos, N *lvn, const K &key, const V &val);
-    virtual N *&remove_at(N *&pos);
+    virtual N *insert_at(N *&pos, N *lvn, const K &key, const V &val);
+    virtual N *remove_at(N *&pos);
 
    public:
     inline size_t size() const noexcept;
@@ -186,12 +186,12 @@ size_t BSTree<K, V, N>::update_height(N *pos) {
 //}
 
 template <typename K, typename V, typename N>
-N *&BSTree<K, V, N>::insert_at(N *&pos, N *lvn, const K &key, const V &val) {
+N *BSTree<K, V, N>::insert_at(N *&pos, N *lvn, const K &key, const V &val) {
     return pos = new N(key, val, lvn);
 }
 
 template <typename K, typename V, typename N>
-N *&BSTree<K, V, N>::remove_at(N *&pos) {
+N *BSTree<K, V, N>::remove_at(N *&pos) {
     if (pos->left && pos->right) {
         auto cur = pos, next = cur->next();
         swap(*cur, *next);

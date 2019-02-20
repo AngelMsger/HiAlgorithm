@@ -16,7 +16,7 @@ public:
     RBTreeNode(K key, V val, BSTreeNode<K, V> *parent = nullptr, BSTreeNode<K, V> *left = nullptr, BSTreeNode<K, V> *right = nullptr);
     RBTreeNode(const BSTreeNode<K, V> &node) = delete;
 
-    RBTreeNode<K, V> *operator=(const BSTreeNode <K, V> &node) override = delete;
+    RBTreeNode<K, V> *operator=(const RBTreeNode <K, V> &node) = delete;
 
     RBTreeNode<K, V> *next() const override {
         return dynamic_cast<RBTreeNode<K, V> *>(BSTreeNode<K, V>::next());
@@ -59,11 +59,11 @@ public:
     template <typename K, typename V, typename N = RBTreeNode<K, V>>
 class RBTree : public BSTree<K, V, N> {
 protected:
-    N *&insert_at(N *&pos, N *lvn, const K &key, const V &val) override {
+    N *insert_at(N *&pos, N *lvn, const K &key, const V &val) override {
         return dynamic_cast<N *>(BSTree<K, V>::insert_at(pos, lvn, key, val));
     }
 
-    N *&remove_at(N *&pos) override {
+    N *remove_at(N *&pos) override {
         return dynamic_cast<N *>(BSTree<K, V>::remove_at(pos));
     }
 };

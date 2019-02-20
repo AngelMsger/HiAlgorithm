@@ -64,12 +64,12 @@ AVLTreeNode<K, V> *AVLTreeNode<K, V>::next() const {
 template <typename K, typename V, typename N = AVLTreeNode<K, V>>
 class AVLTree : public BSTree<K, V, N> {
    protected:
-    N *&insert_at(N *&pos, N *lvn, const K &key, const V &val) override {
+    N *insert_at(N *&pos, N *lvn, const K &key, const V &val) override {
         return dynamic_cast<N *>(
             BSTree<K, V, N>::insert_at(pos, lvn, key, val));
     }
 
-    N *&remove_at(N *&pos) override {
+    N *remove_at(N *&pos) override {
         return dynamic_cast<N *>(BSTree<K, V, N>::remove_at(pos));
     }
 };
