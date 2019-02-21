@@ -152,9 +152,7 @@ class BSTree {
 template <typename K, typename V, typename N>
 void BSTree<K, V, N>::update_height_above(N *pos) {
     while (pos) {
-        auto origin = pos->height;
-        auto updated = this->update_height(pos);
-        if (origin == updated) break;
+        this->update_height(pos);
         pos = pos->parent;
     }
 }
