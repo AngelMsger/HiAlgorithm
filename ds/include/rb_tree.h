@@ -8,64 +8,49 @@ namespace angelmsger {
 enum Color { red, black };
 
 template <typename K, typename V>
-class RBTreeNode : public BSTreeNode<K, V> {
-public:
+class RBTreeNode {
+   public:
+    // 关键码
+    K key;
+    // 值
+    V val;
+    // 亲属关系 (父亲, 左孩子, 右孩子)
+    RBTreeNode<K, V> *parent, *left, *right;
+    // 以当前节点为根的子树规模
     size_t height = 0;
-    Color color = black;
+    // 节点颜色
+    Color color;
     RBTreeNode();
-    RBTreeNode(K key, V val, BSTreeNode<K, V> *parent = nullptr, BSTreeNode<K, V> *left = nullptr, BSTreeNode<K, V> *right = nullptr);
-    RBTreeNode(const BSTreeNode<K, V> &node) = delete;
-
-    RBTreeNode<K, V> *operator=(const RBTreeNode <K, V> &node) = delete;
-
-    RBTreeNode<K, V> *next() const override {
-        return dynamic_cast<RBTreeNode<K, V> *>(BSTreeNode<K, V>::next());
-    }
-
-    friend void swap(RBTreeNode<K, V> &lhs, RBTreeNode<K, V> &rhs) {
-        using std::swap;
-        auto lhs_pos = const_cast<RBTreeNode<K, V> *>(&lhs),
-                rhs_pos = const_cast<RBTreeNode<K, V> *>(&rhs);
-        if (lhs.is_left())
-            lhs.parent->left = rhs_pos;
-        else if (lhs.is_right())
-            lhs.parent->right = rhs_pos;
-        if (lhs.left) lhs.left->parent = rhs_pos;
-        if (lhs.right) lhs.right->parent = rhs_pos;
-        if (rhs.is_left())
-            rhs.parent->left = lhs_pos;
-        else if (rhs.is_right())
-            rhs.parent->right = lhs_pos;
-        if (rhs.left) rhs.left->parent = lhs_pos;
-        if (rhs.right) rhs.right->parent = lhs_pos;
-        swap(lhs.parent, rhs.parent);
-        swap(lhs.left, rhs.left);
-        swap(lhs.right, rhs.right);
-        swap(lhs.height, rhs.height);
-    }
+    RBTreeNode(K key, V val, RBTreeNode<K, V> *parent = nullptr,
+               RBTreeNode<K, V> *left = nullptr,
+               RBTreeNode<K, V> *right = nullptr, Color color = black);
+    RBTreeNode(const RBTreeNode<K, V> &node) = delete;
+    RBTreeNode<K, V> *operator=(const RBTreeNode<K, V> &node) = delete;
 };
 
-    template<typename K, typename V>
-    RBTreeNode<K, V>::RBTreeNode() {
+template <typename K, typename V>
+RBTreeNode<K, V>::RBTreeNode()
+    : parent(nullptr), left(nullptr), right(nullptr), color(black) {}
 
-    }
+template <typename K, typename V>
+RBTreeNode<K, V>::RBTreeNode(K key, V val, RBTreeNode<K, V> *parent,
+                             RBTreeNode<K, V> *left, RBTreeNode<K, V> *right,
+                             Color color)
+    : key(key),
+      val(val),
+      parent(parent),
+      left(left),
+      right(right),
+      color(color) {}
 
-    template<typename K, typename V>
-    RBTreeNode<K, V>::RBTreeNode(K key, V val, BSTreeNode<K, V> *parent, BSTreeNode<K, V> *left,
-                                 BSTreeNode<K, V> *right):BSTreeNode<K, V>(key, val, parent, left, right) {
-
-    }
-
-    template <typename K, typename V, typename N = RBTreeNode<K, V>>
+template <typename K, typename V, typename N = RBTreeNode<K, V>>
 class RBTree : public BSTree<K, V, N> {
-protected:
+   protected:
     N *insert_at(N *&pos, N *lvn, const K &key, const V &val) override {
-        return dynamic_cast<N *>(BSTree<K, V>::insert_at(pos, lvn, key, val));
+        return BSTree<K, V, N>::insert_at(pos, lvn, key, val);
     }
 
-    N *remove_at(N *&pos) override {
-        return dynamic_cast<N *>(BSTree<K, V>::remove_at(pos));
-    }
+    N *remove_at(N *&pos) override { return BSTree<K, V, N>::remove_at(pos); }
 };
 }  // namespace angelmsger
 
