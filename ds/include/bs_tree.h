@@ -75,6 +75,19 @@ N *next_node(N *pos) {
     return cur;
 }
 
+// 更高的孩子
+template <typename N>
+inline N *taller(const N *pos) noexcept {
+    if (!pos) return nullptr;
+    auto left_height = tree_height(pos->left),
+         right_height = tree_height(pos->right);
+    // 相等情况下优先选择与父亲同侧者, 便于简化 AVL 树后续操作
+    if (left_height == right_height)
+        return is_left_child(pos) ? pos->left : pos->right;
+    else
+        return (right_height < left_height) ? pos->left : pos->right;
+}
+
 // 交换两个节点的亲属关系
 template <typename N>
 void swap_node(N *lhs, N *rhs) {
@@ -101,16 +114,16 @@ void swap_node(N *lhs, N *rhs) {
  */
 template <typename K, typename V, typename N = BSTreeNode<K, V>>
 class BSTree {
-   private:
+   protected:
     N *_root = nullptr;
     mutable N *_lvn = nullptr;
     size_t _size = 0;
-    // 从指定节点向上更新所有节点的高度
-    void update_height_above(N *pos);
     // 查找
     N *&search_in(const K &key) const;
-
-   protected:
+    // 获取引用
+    N *&ref(N *pos);
+    // 从指定节点向上更新所有节点的高度
+    void update_height_above(N *pos);
     // 更新某一节点的高度
     virtual size_t update_height(N *pos);
     // 在某一位置插入
@@ -119,6 +132,7 @@ class BSTree {
     virtual N *remove_at(N *&pos);
 
    public:
+    virtual ~BSTree() noexcept;
     // 规模
     inline size_t size() const noexcept;
     // 高度
@@ -150,16 +164,38 @@ class BSTree {
 };
 
 template <typename K, typename V, typename N>
-void BSTree<K, V, N>::update_height_above(N *pos) {
-    while (pos) {
-        this->update_height(pos);
-        pos = pos->parent;
+BSTree<K, V, N>::~BSTree() noexcept {
+    if (_root) {
+        Queue<N *> queue;
+        queue.push(_root);
+        while (!queue.empty()) {
+            auto cur = queue.pop();
+            if (cur->left) queue.push(cur->left);
+            if (cur->right) queue.push(cur->right);
+            delete cur;
+        }
+        _root = nullptr;
     }
+    _size = 0;
+    _lvn = nullptr;
+}
+
+template <typename K, typename V, typename N>
+N *&BSTree<K, V, N>::ref(N *pos) {
+    if (pos == _root)
+        return _root;
+    else if (pos && pos->parent)
+        return is_left_child(pos) ? pos->parent->left : pos->parent->right;
+    else
+        throw "try to get ref of NULL";
 }
 
 template <typename K, typename V, typename N>
 N *&BSTree<K, V, N>::search_in(const K &key) const {
-    if (_lvn && _lvn->key == key) return _lvn;
+    if (_lvn && _lvn->key == key)
+        return _lvn;
+    else
+        _lvn = nullptr;
     auto cur = const_cast<N **>(&_root);
     while (*cur && (*cur)->key != key) {
         _lvn = *cur;
@@ -167,6 +203,14 @@ N *&BSTree<K, V, N>::search_in(const K &key) const {
                                 : const_cast<N **>(&((*cur)->right));
     }
     return *cur;
+}
+
+template <typename K, typename V, typename N>
+void BSTree<K, V, N>::update_height_above(N *pos) {
+    while (pos) {
+        this->update_height(pos);
+        pos = pos->parent;
+    }
 }
 
 template <typename K, typename V, typename N>
@@ -178,7 +222,9 @@ size_t BSTree<K, V, N>::update_height(N *pos) {
 
 template <typename K, typename V, typename N>
 N *BSTree<K, V, N>::insert_at(N *&pos, N *lvn, const K &key, const V &val) {
-    return pos = new N(key, val, lvn);
+    pos = new N(key, val, lvn);
+    this->update_height_above(pos);
+    return pos;
 }
 
 template <typename K, typename V, typename N>
@@ -188,9 +234,8 @@ N *BSTree<K, V, N>::remove_at(N *&pos) {
         swap_node(cur, next);
         pos = next;
         auto parent = cur->parent;
-        auto &ref = is_left_child(cur) ? parent->left : parent->right;
-        ref = this->remove_at(cur);
-        return pos;
+        auto &ref = this->ref(cur);
+        return ref = this->remove_at(cur);
     } else {
         N *replace;
         if (!pos->left)
@@ -198,6 +243,7 @@ N *BSTree<K, V, N>::remove_at(N *&pos) {
         else
             replace = pos->left;
         if (replace) replace->parent = pos->parent;
+        this->update_height_above(replace);
         delete pos;
         return pos = replace;
     }
@@ -234,7 +280,6 @@ void BSTree<K, V, N>::set(const K &key, const V &val) {
     auto &pos = this->search_in(key);
     if (!pos) {
         this->insert_at(pos, _lvn, key, val);
-        this->update_height_above(pos);
         ++_size;
     } else
         pos->val = val;
@@ -245,7 +290,6 @@ void BSTree<K, V, N>::remove(const K &key) {
     auto &pos = this->search_in(key);
     if (!pos) return;
     this->remove_at(pos);
-    this->update_height_above(_lvn);
     --_size;
 }
 
@@ -262,9 +306,9 @@ void BSTree<K, V, N>::traverse_bfs(function<void(K &, V &)> func) {
     queue.push(_root);
     while (!queue.empty()) {
         auto cur = queue.pop();
-        func(cur->key, cur->val);
         if (cur->left) queue.push(cur->left);
         if (cur->right) queue.push(cur->right);
+        func(cur->key, cur->val);
     }
 }
 

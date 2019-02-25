@@ -27,6 +27,21 @@
         "locale": "cpp",
         "array": "cpp",
         "future": "cpp",
-        "thread": "cpp"
+        "thread": "cpp",
+        "__split_buffer": "cpp",
+        "deque": "cpp",
+        "hash_map": "cpp",
+        "forward_list": "cpp",
+        "map": "cpp",
+        "queue": "cpp",
+        "regex": "cpp",
+        "set": "cpp",
+        "stack": "cpp",
+        "string": "cpp",
+        "string_view": "cpp",
+        "unordered_map": "cpp",
+        "unordered_set": "cpp",
+        "vector": "cpp",
+        "hashtable": "cpp"
     }
 }
