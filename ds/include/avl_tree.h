@@ -61,7 +61,7 @@ N *AVLTree<K, V, N>::rotate_at(N *pos) {
 }
 
 template <typename K, typename V, typename N>
-N *AVLTree<K, V, N>::connect_3_4(N *node_1, N *node_2, N *node_3, N *tree_1,
+N *AVLTree<K, V, N>:: connect_3_4(N *node_1, N *node_2, N *node_3, N *tree_1,
                                  N *tree_2, N *tree_3, N *tree_4) {
     node_1->parent = node_3->parent = node_2;
     node_2->left = node_1;
@@ -70,22 +70,25 @@ N *AVLTree<K, V, N>::connect_3_4(N *node_1, N *node_2, N *node_3, N *tree_1,
     if (tree_1) tree_1->parent = node_1;
     node_1->right = tree_2;
     if (tree_2) tree_2->parent = node_1;
-    node_2->left = tree_3;
-    if (tree_3) tree_3->parent = node_2;
-    node_2->right = tree_4;
-    if (tree_4) tree_4->parent = node_2;
+    this->update_height(node_1);
+    node_3->left = tree_3;
+    if (tree_3) tree_3->parent = node_3;
+    node_3->right = tree_4;
+    if (tree_4) tree_4->parent = node_3;
+    this->update_height(node_3);
+    this->update_height(node_2);
     return node_2;
 }
 
 template <typename K, typename V, typename N>
 N *AVLTree<K, V, N>::insert_at(N *&pos, N *lvn, const K &key, const V &val) {
-    // FIXME: WRONG CODE
     auto inserted = BSTree<K, V, N>::insert_at(pos, lvn, key, val);
     for (auto cur = inserted->parent; cur; cur = cur->parent) {
         if (AVLTree<K, V, N>::balanced(cur))
             this->update_height(cur);
         else {
-            this->rotate_at(taller(taller(cur)));
+            auto &ref = this->ref(cur);
+            ref = this->rotate_at(taller(taller(cur)));
             break;
         }
     }
@@ -94,13 +97,14 @@ N *AVLTree<K, V, N>::insert_at(N *&pos, N *lvn, const K &key, const V &val) {
 
 template <typename K, typename V, typename N>
 N *AVLTree<K, V, N>::remove_at(N *&pos) {
-    // FIXME: WRONG CODE
     auto replace = BSTree<K, V, N>::remove_at(pos);
     for (auto cur = this->_lvn; cur; cur = cur->parent) {
         if (AVLTree<K, V, N>::balanced(cur))
             this->update_height(cur);
-        else
-            this->rotate_at(taller(taller(cur)));
+        else {
+            auto &ref = this->ref(cur);
+            ref = this->rotate_at(taller(taller(cur)));
+        }
     }
     return replace;
 }
