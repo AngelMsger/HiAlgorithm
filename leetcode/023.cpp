@@ -38,8 +38,8 @@ struct ListNode {
 };
 
 class NPCompareContainer {
-public:
-    bool operator()(ListNode *lhs, ListNode* rhs) {
+   public:
+    bool operator()(ListNode* lhs, ListNode* rhs) {
         return rhs->val < lhs->val;
     }
 };
