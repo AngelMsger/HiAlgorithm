@@ -16,7 +16,12 @@
  * 解题思路:
  * 以树的结构思考问题。
  */
-#include <bits/stdc++.h>
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <chrono>
+
 using namespace std;
 
 static auto _ = []() {

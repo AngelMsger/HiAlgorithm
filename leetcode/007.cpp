@@ -24,7 +24,9 @@
  * 虽然是简单的问题，但要注意数值溢出以及除数为0的特殊情况。
  */
 
-#include <bits/stdc++.h>
+#include <iostream>
+#include <chrono>
+
 using namespace std;
 
 static auto _ = []() {

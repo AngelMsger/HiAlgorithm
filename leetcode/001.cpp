@@ -14,7 +14,11 @@
  * 将已经算过，并且可能会被将来所用的内容选择合适的数据结构缓存下来。
  */
 
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+#include <chrono>
+
 using namespace std;
 
 static auto _ = []() {

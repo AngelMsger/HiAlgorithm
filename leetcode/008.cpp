@@ -53,7 +53,10 @@
  * 如解答，避免使用如long类型的变量来绕过int值的边界问题。
  */
 
-#include <bits/stdc++.h>
+#include <iostream>
+#include <string>
+#include <chrono>
+
 using namespace std;
 
 static auto _ = []() {

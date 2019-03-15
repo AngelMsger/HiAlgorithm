@@ -21,7 +21,10 @@
  * 遍历比对数组中的字符串即可就得结果。
  */
 
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <chrono>
+
 using namespace std;
 
 static auto _ = []() {

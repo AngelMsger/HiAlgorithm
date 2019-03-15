@@ -12,7 +12,10 @@
  * 都无法使容量更大。
  */
 
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <chrono>
+
 using namespace std;
 
 static auto _ = []() {

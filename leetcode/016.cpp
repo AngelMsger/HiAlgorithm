@@ -13,7 +13,10 @@
  * 与15题十分类似。
  */
 
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <numeric>
+#include <chrono>
 
 using namespace std;
 

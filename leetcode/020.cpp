@@ -31,7 +31,13 @@
  * 解题思路:
  * 将扫描到的左括号入栈，右括号与栈顶元素比较，匹配则弹出相消，全部顺利匹配完成则返回真。
  */
-#include <bits/stdc++.h>
+
+#include <iostream>
+#include <unordered_set>
+#include <unordered_map>
+#include <stack>
+#include <chrono>
+
 using namespace std;
 
 static auto _ = []() {

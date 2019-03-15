@@ -15,7 +15,9 @@
  * 比较简单的计算，注意正确理解题意。
  */
 
-#include <bits/stdc++.h>
+#include <iostream>
+#include <chrono>
+
 using namespace std;
 
 static auto _ = []() {

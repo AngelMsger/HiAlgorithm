@@ -16,7 +16,10 @@
  * 算结果，并考虑清楚边界情况。
  */
 
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <chrono>
+
 using namespace std;
 
 static auto _ = []() {

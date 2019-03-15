@@ -28,7 +28,11 @@
  * 按照规则逐步构造多个队列并顺序输出即可。
  */
 
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <sstream>
+#include <chrono>
+
 using namespace std;
 
 static auto _ = []() {

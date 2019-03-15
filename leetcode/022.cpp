@@ -17,7 +17,11 @@
  * 解题思路:
  * 每放置一个左括号，就可以多放置一个右括号。
  */
-#include <bits/stdc++.h>
+
+#include <iostream>
+#include <vector>
+#include <chrono>
+
 using namespace std;
 
 static auto _ = []() {

@@ -50,7 +50,10 @@
  * 本题没有太多参考意义，可以跳过不做，答案由社区讨论6274提供。
  */
 
-#include <bits/stdc++.h>
+#include <iostream>
+#include <sstream>
+#include <chrono>
+
 using namespace std;
 
 static auto _ = []() {

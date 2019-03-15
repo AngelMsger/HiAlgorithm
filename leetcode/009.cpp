@@ -26,7 +26,11 @@
  * 或本题给出的逐位取数。
  */
 
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <chrono>
+
 using namespace std;
 
 static auto _ = []() {

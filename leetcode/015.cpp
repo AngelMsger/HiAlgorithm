@@ -20,7 +20,10 @@
  * 当现有解决问题的方案的时间复杂度大于O(nlogn)时才会考虑引入排序以寻求优化。
  */
 
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <chrono>
+
 using namespace std;
 
 static auto _ = []() {
