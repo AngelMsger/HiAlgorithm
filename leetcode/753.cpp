@@ -1,5 +1,5 @@
 /**
- * 753 - 平衡二叉树
+ * 753 - 破解保险箱
  * @see https://leetcode-cn.com/problems/cracking-the-safe/
  *
  * 有一个需要密码才能打开的保险箱。密码是 n 位数, 密码的每一位是 k 位序列 0, 1, ..., k-1 中的一个。
