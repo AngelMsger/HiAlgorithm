@@ -46,11 +46,11 @@ public:
             for (auto j = 0; j < coinClasses; ++j) {
                 auto coin = coins[j];
                 if (
-                        i - coin >= 0 &&
-                        // can be optimized
-                        minCounts[i - coin] != INT_MAX &&
-                        minCounts[i - coin] + 1 < minCounts[i]
-                        ) {
+                    i - coin >= 0 &&
+                    // can be optimized
+                    minCounts[i - coin] != INT_MAX &&
+                    minCounts[i - coin] + 1 < minCounts[i]
+                ) {
                     minCounts[i] = minCounts[i - coin] + 1;
                 }
             }
