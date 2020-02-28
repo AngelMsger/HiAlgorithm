@@ -28,11 +28,9 @@ static auto _ = []() {
 class Solution {
 public:
     vector<int> countBits(int num) {
-        if (num == 0) return {0};
         vector<int> result(num + 1);
         result[0] = 0;
-        result[1] = 1;
-        for (auto i = 2; i <= num; ++i) {
+        for (auto i = 1; i <= num; ++i) {
             result[i] = result[i >> 1] + (i & 1);
         }
         return result;
