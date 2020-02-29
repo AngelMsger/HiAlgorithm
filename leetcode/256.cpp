@@ -52,8 +52,10 @@ public:
         for (auto i = 0; i <= houseCount; ++i) {
             minCosts[i] = new int[colorCount];
         }
+        for (auto i = 0; i < colorCount; ++i) {
+            minCosts[0][i] = 0;
+        }
 
-        minCosts[0][0] = minCosts[0][1] = minCosts[0][2] = 0;
         for (auto i = 1; i <= houseCount; ++i) {
             for (auto j = 0; j < colorCount; ++j) {
                 auto minCostsWithColorJ = INT_MAX;
