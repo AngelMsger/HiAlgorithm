@@ -10,6 +10,9 @@ My [LeetCode](https://leetcode-cn.com/angelmsger/) Solution.
 |Manacher|[005](005.cpp)|
 
 ## Changelog
+* 2020/02/29 - Update 150, 062, 322, 063, 091, 256, 674, 361, 338, 265, 198, 213.
+* 2019/11/15 - Update 753
+* 2019/03/15 - Update 023.
 * 2018/09/17 - Update 110.
 * 2018/08/29 - Update 028 - Unfinished.
 * 2018/08/23 - Update 027.
