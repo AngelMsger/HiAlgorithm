@@ -29,35 +29,27 @@ static auto _ = []() {
 }();
 
 class Solution {
+private:
+    int robSub(vector<int>& nums) {
+        auto houseCount = nums.size();
+        if (houseCount == 0) return 0;
+        auto *maxRob = new int[houseCount + 1];
+        maxRob[0] = 0;
+        maxRob[1] = nums[0];
+        for (auto i = 2; i <= houseCount; ++i) {
+            maxRob[i] = max(maxRob[i - 2] + nums[i - 1], maxRob[i - 1]);
+        }
+        auto subMax = maxRob[houseCount];
+        delete[] maxRob;
+        return subMax;
+    }
 public:
     int rob(vector<int>& nums) {
         if (nums.empty()) return 0;
         if (nums.size() == 1) return nums[0];
-        if (nums.size() == 2) return max(nums[0], nums[1]);
-        if (nums.size() == 3) return max({nums[0], nums[1], nums[2]});
-        // 不抢房间 0，房间 n - 1 随意，等效于计算 1 ~ (n - 1)
-        vector<int> houseWithoutHead(nums.cbegin() + 1, nums.cend());
-        vector<int> maxWithoutHead(nums.size());
-        maxWithoutHead[0] = 0;
-        maxWithoutHead[1] = houseWithoutHead[0];
-        for (auto i = 2; i <= houseWithoutHead.size(); ++i) {
-            maxWithoutHead[i] = max(
-                maxWithoutHead[i - 1],
-                maxWithoutHead[i - 2] + houseWithoutHead[i - 1]
-            );
-        }
-        // 抢房间 0，房间 n - 1 不能抢，等下雨计算 0 + (1 ~ (n - 2))
-        vector<int> houseWithHead(nums.cbegin() + 2, nums.cend() - 1);
-        vector<int> maxWithHead(nums.size() - 2);
-        maxWithHead[0] = 0;
-        maxWithHead[1] = houseWithHead[0];
-        for (auto i = 2; i <= houseWithHead.size(); ++i) {
-            maxWithHead[i] = max(
-                maxWithHead[i - 1],
-                maxWithHead[i - 2] + houseWithHead[i - 1]
-            );
-        }
-        return max(maxWithoutHead.back(), maxWithHead.back() + nums[0]);
+        vector<int> withoutFront(nums.cbegin() + 1, nums.cend());
+        vector<int> withoutBack(nums.cbegin(), nums.cend() - 1);
+        return max(this->robSub(withoutFront), this->robSub(withoutBack));
     }
 };
 
