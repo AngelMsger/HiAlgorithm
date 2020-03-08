@@ -25,6 +25,17 @@
  * 书籍页数总和小于等于2147483647
  */
 
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+static auto _ = []() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    return nullptr;
+}();
+
 class Solution {
 public:
     /**
@@ -33,10 +44,63 @@ public:
      * @return: an integer
      */
     int copyBooks(vector<int> &pages, int k) {
-        // write your code here
+        auto pageCount = pages.size();
+        if (pageCount == 0) return 0;
+        auto **minCost = new int*[pageCount + 1];
+        for (auto i = 0; i <= pageCount; ++i) {
+            minCost[i] = new int[k];
+            if (i == 0) {
+                // 没有书, 所需时间为 0
+                for (auto j = 0; j < k; ++j)
+                    minCost[0][j] = 0;
+            } else {
+                // 只派 1 个人, 所需时间为页数和
+                minCost[i][0] = minCost[i - 1][0] + pages[i - 1];
+            }
+        }
+        // 截止当前书籍页数最大值(所需时间最多值)
+        auto *maxPage = new int[pageCount];
+        maxPage[0] = pages[0];
+        for (auto i = 1; i < pageCount; ++i)
+            maxPage[i] = max(maxPage[i - 1], pages[i]);
+
+        int copyOfJ, cost;
+        for (auto i = 1; i <= pageCount; ++i) {
+            // 求书 [0, i - 1] 在派遣 j + 1 个人的前提下所需最少时间
+            for (auto j = 1; j < k; ++j) {
+                if (i <= j + 1) {
+                    // 人多, 书少, 一人一本
+                    minCost[i][j] = maxPage[i - 1];
+                } else {
+                    // 人少, 书多, 可划分
+                    copyOfJ = 0;
+                    minCost[i][j] = minCost[i][j - 1];
+                    for (int l = i - 1; 0 <= l; --l) {
+                        // [0, i - 1] 这些书中, 第 j 人读 [l, i - 1]
+                        copyOfJ += pages[l];
+                        cost = max(minCost[l][j - 1], copyOfJ);
+                        if (cost < minCost[i][j])
+                            minCost[i][j] = cost;
+                    }
+                }
+            }
+        }
+
+        auto globalMinCost = minCost[pageCount][k - 1];
+        for (auto i = 0; i <= pageCount; ++i)
+            delete[] minCost[i];
+        delete[] minCost;
+        delete[] maxPage;
+        return globalMinCost;
     }
 };
 
 int main() {
+    Solution solution;
+    vector<int> pages_1{3, 2, 4}, pages_2{3, 2, 4};
+    auto k_1 = 2, k_2 = 3;
+    cout
+        << solution.copyBooks(pages_1, k_1) /* 5 */ << '\n'
+        << solution.copyBooks(pages_2, k_2) /* 4 */ << endl;
     return 0;
 }
