@@ -102,7 +102,7 @@ int main(int argc, char *argv[]) {
     Solution solution;
 
     auto start = chrono::high_resolution_clock::now();
-    auto result = solution.longestPalindrome("");
+    auto result = solution.longestPalindrome("babad");
     auto end = chrono::high_resolution_clock::now();
 
     cout << result;
