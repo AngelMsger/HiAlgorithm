@@ -19,3 +19,4 @@ See [here](algorithm) for Detail.
 * 2018/08/24 - Init Data Structure Module.
 * 2018/08/13 - Migrate Original Code, Init LeetCode Module.
 * 2019/02/20 - Initially Finished Vector, List, Stack, Queue, BSTree.
+* 2020/11/4 - Remove Original Data Structure Source.
