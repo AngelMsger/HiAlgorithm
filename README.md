@@ -7,7 +7,7 @@
 ## Content
 
 ### LeetCode Solution
-See [here](leetcode) for Detail.
+See [here](oj/leetcode) for Detail.
 
 ### Data Structure
 See [here](ds) for Detail.
